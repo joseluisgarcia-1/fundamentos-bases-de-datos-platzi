@@ -1,0 +1,242 @@
+Bienvenida conceptos básicos y contexto histórico de las Bases de Datos
+
+***Clase 1 Bienvenida conceptos básicos y contexto histórico de las Bases de Datos***
+
+Introducción a las bases de datos relacionales
+
+***Clase 2 Historia de las bases de datos relacionales***
+
+
+
+***Clase 3 Entidades y atributos***
+
+
+
+***Clase 4 Entidades de Platzi Blog***
+
+
+
+***Clase 5 Relaciones***
+
+
+
+***Clase 6 Múltiples muchos***
+
+
+
+***Clase 7 Diagrama ER***
+
+
+
+***Clase 8 Diagrama Físico:  tipos de datos y constraints***
+
+
+
+***Clase 9 Diagrama Físico: normalización***
+
+
+
+***Clase 10 Formas normales en Bases de Datos relacionales***
+
+
+
+***Clase 11 Diagrama Físico: normalizando Platziblog***
+
+
+
+RDBMS (MySQL) o cómo hacer lo anterior de manera práctica
+
+***Clase 12 ¿Qué es RDB y RDBMS?***
+
+
+
+***Clase 13 Instalación local de un RDBMS (Windows)***
+
+
+
+***Clase 14 Instalación local de un RDBMS (Mac)***
+
+
+
+***Clase 15 Instalación local de un RDBMS (Ubuntu)***
+
+
+
+***Clase 16 Clientes gráficos***
+
+
+
+***Clase 17 Servicios administrados***
+
+SQL hasta en la sopa
+
+***Clase 18 Historia de SQL***
+
+
+
+***Clase 19 DDL create***
+
+
+
+***Clase 20 CREATE VIEW y DDL ALTER***
+
+
+
+***Clase 21 DDL drop***
+
+
+
+***Clase 22 DML***
+
+
+
+***Clase 23 ¿Qué tan standard es SQL?***
+
+
+
+***Clase 24 Creando Platziblog: tablas independientes***
+
+
+
+***Clase 25 Creando Platziblog: tablas dependientes***
+
+
+
+***Clase 26 Creando Platziblog: tablas transitivas***
+
+
+
+Consultas a una base de datos
+
+***Clase 27 ¿Por qué las consultas son tan importantes?***
+
+
+
+***Clase 28 Estructura básica de un Query***
+
+
+
+***Clase 29 SELECT***
+
+
+
+***Clase 30 FROM***
+
+
+
+***Clase 31 Utilizando la sentencia FROM***
+
+
+
+***Clase 32 WHERE***
+
+
+
+***Clase 33 Utilizando la sentencia WHERE nulo y no nulo***
+
+
+
+***Clase 34 GROUP BY***
+
+
+
+***Clase 35 ORDER BY y HAVING***
+
+
+
+***Clase 36 El interminable agujero de conejo (Nested queries)***
+
+
+
+***Clase 37 ¿Cómo convertir una pregunta en un query SQL?***
+
+
+
+***Clase 38 Preguntándole a la base de datos***
+
+
+
+***Clase 39 Consultando PlatziBlog***
+
+
+
+Introducción a la bases de datos NO relacionales
+
+***Clase 40 ¿Qué son y cuáles son los tipos de bases de datos no relacionales?***
+
+
+
+***Clase 41 Servicios administrados y jerarquía de datos***
+
+
+
+Manejo de modelos de datos en bases de datos no relacionales
+***Clase 42 Top level collection con Firebase***
+
+
+
+***Clase 43 Creando y borrando documentos en Firestore***
+
+
+
+***Clase 44 Colecciones vs subcolecciones***
+
+
+
+***Clase 45 Recreando Platziblog***
+
+
+
+***Clase 46 Construyendo Platziblog en Firestore***
+
+
+
+***Clase 47 Proyecto final: transformando tu proyecto en una db no relacional***
+
+
+
+Bases de datos en la vida real
+
+***Clase 48 Bases de datos en la vida real***
+
+
+
+***Clase 49 Big Data***
+
+
+
+***Clase 50 Data warehouse***
+
+
+
+***Clase 51 Data mining***
+
+
+
+***Clase 52 ETL***
+
+
+
+***Clase 53 Business intelligence***
+
+
+
+***Clase 54 Machine Learning***
+
+
+
+***Clase 55 Data Science***
+
+
+
+***Clase 56 ¿Por qué aprender bases de datos hoy?***
+
+
+
+Bonus
+
+***Clase 57 Bases de datos relacionales vs no relacionales***
+
+
+
+***Clase 58 Elegir una base de datos***
