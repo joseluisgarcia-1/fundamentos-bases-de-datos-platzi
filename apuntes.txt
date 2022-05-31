@@ -6,15 +6,64 @@ Introducción a las bases de datos relacionales
 
 ***Clase 2 Historia de las bases de datos relacionales***
 
+Las bases de datos surgen de la necesidad de conservar la información más allá de lo que existe en la memoria RAM.
 
+Las bases de datos basadas en archivos eran datos guardados en texto plano, fáciles de guardar pero muy difíciles de consultar y por la necesidad de mejorar esto nacen las bases de datos relacionales. 
+Su inventor Edgar Codd dejó ciertas reglas para asegurarse de que toda la filosofía de las bases de datos no se perdiera, estandarizando el proceso.
+
+Recomendado de la clase:
+https://www.w3resource.com/sql/sql-basic/codd-12-rule-relation.php
+https://www.mindmeister.com/es/1079684487/las-12-reglas-de-codd-del-modelo-relacional?fullscreen=1
+
+Las 12 reglas de Codd: fuente
+
+Regla 0: Regla de fundación.
+Regla 1: Regla de la información.
+Regla 2: Regla del acceso garantizado.
+Regla 3: Regla del tratamiento sistemático de valores nulos.
+Regla 4: Catálogo dinámico en línea basado en el modelo relacional.
+Regla 5: Regla comprensiva del sublenguaje de los datos.
+Regla 6: regla de actualización de vistas.
+Regla 7: alto nivel de inserción, actualización, y cancelación.
+Regla 8: Independencia física de los datos.
+Regla 9: Independencia lógicas de los datos.
+Regla 10: Independencia de la integridad.
+Regla 11: Independencia de la distribución.
+Regla 12: La regla de la no subversión.
 
 ***Clase 3 Entidades y atributos***
 
+En este ejemplo o curso, cuando un atributo se lo encierra en dos circulos o doble óvalo se está diciendo que es un atributo multivaluado entonces significado
+que tiene más de un valor o multiples valores
+
+- Atributos compuestos porque están compuestos valga la aclaración por otros atributos
+- Por convención las entidades se colocan en plural, porque una entidad representa un grupo de estos objetos
+- Cuando un atributo tiene un guión debajo del nombre o el nombre subrayado, es un atributo que dentro de la entidad se va identificar de forma única
+entonces lo identifican de manera única dentro del conjunto o de la entidad
+- Entidad fuerte:
+    ejemplo:
+        Libro
+- Entidades débiles:
+    - Se representan con un cuadrado pero tienen doble línea, estas entidades pueden ser débiles por dos motivos, uno por identidad y otro por existencia
+    las entidades débiles por identidad quiere decir que no se se diferencian entre sí más que por la clave de su entidad fuerte
+        ejemplo:
+            ejemplares del libro que es la entidad fuerte
 
 
 ***Clase 4 Entidades de Platzi Blog***
 
+Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos representará retos muy interesantes.
 
+- Las entidades recordar que convencionalmente se escriben en plural
+    ejemplo de entidad -> post, y sus atributos:
+        entidad: posts
+        atributos: título, fecha_publicación, contenido, status, etiquetas(atributo multivaluado), id(atributo que dentro de la entidad se va identificar de forma única)  
+    ejemplo de entidad -> usuarios, y sus atributos:
+        entidad: usuarios
+        atributos: login, password, apodo, username, email, id(atributo que dentro de la entidad se va identificar de forma única)
+
+Primer paso: Identificar las entidades
+Segundo paso: Pensar en los atributos
 
 ***Clase 5 Relaciones***
 
