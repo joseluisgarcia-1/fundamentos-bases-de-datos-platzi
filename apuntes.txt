@@ -358,7 +358,13 @@ RDBMS (MySQL) o cómo hacer lo anterior de manera práctica
 
 ***Clase 12 ¿Qué es RDB y RDBMS?***
 
-
+RDB: Relational Database(Bases de datos relacionales)
+RDBMS: Relational Database Management System (Sistema manejador de bases de datos relacionales)
+este nos ayuda a cumplir las reglas
+ejemplos de RDBMS:
+    Mysql
+    PostsgreSQL
+    Oracle
 
 ***Clase 13 Instalación local de un RDBMS (Windows)***
 
