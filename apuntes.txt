@@ -67,19 +67,139 @@ Segundo paso: Pensar en los atributos
 
 ***Clase 5 Relaciones***
 
+- Las relaciones es la manera en que empezamos a ligar nuestras diferentes entidades u objetos
+    ejemplos:
+        las relaciones se representan con un rombo
 
+ejemplo:
+----------            ---------
+automóvil ----|tiene|--- dueño
+----------            ---------
+----------                ---------
+jugador    ----|pertenece|--- equipo
+----------                ---------
 
+Las relaciones nos permiten ligar o unir nuestras diferentes entidades y se representan con rombos. 
+Por convención se definen a través de verbos.
+
+Las relaciones tienen una propiedad llamada cardinalidad y tiene que ver con números. 
+Cuántos de un lado pertenecen a cuántos del otro lado:
+
+Cardinalidad: 1 a 1
+Cardinalidad: 0 a 1
+Cardinalidad: 1 a N
+Cardinalidad: 0 a N
+
+- ejemplos de cada cardinalidad:
+    1 a 1:
+        (1)persona tiene (1)datos_contacto
+        (1)datos_contacto pertenecen a (1)persona
+        por eso decimos que es una relación de 1 a 1 y la podemos representan así: 1:1
+        en diagramas físicos los vamos a encontrar así: 
+        __|_______________|__
+          |               |
+y en este también lo representa y se entiende como: 1 y sólo 1 de un lado y 1 y sólo 1 del otro lado     
+        _||_______________||_
+         ||               ||
+          
+    0 a 1:
+
+        algunos autores la discuten, sin embargo, se la conoce como 1 a 1 opcional y eso queire decir que no existe alguno de los lados, la podemos representar 0:1
+        ejemplo:
+            sesion_actual tiene usuario
+            la sesion_actual debe tener un usuario, pero el usuario puede que no esté en la sesión en este momento, por lo tanto la cardinalidad se define de 0:1
+            y se representa así:
+            --|-------|--
+            con la línea punteada para indicar que es opcional, o así:
+            __|0_______________|__
+              |                |
+            
+    1 a N:
+        cabe aclara que índica que en un lado tenemos uno(1) y en otro lado tenemos muchos(N)
+            ejemplo:
+                persona(1) tiene (N)automóvil
+                (1)persona tiene automóvil(N)
+                (N)muchos automóviles pertenecen a (1)persona
+                
+                y se representa así:
+            __|_______________0<__
+              |                                
+              (pate gallina al final)
+            __|_______________<__
+              |                 
+              (pate gallina al final)
+            _||_______________|<_
+             ||               |
+            (pate gallina al final)
+
+    0 a N:
+
+        algunos autores también la discuten, sin embargo, se la conoce como 0 a N opcional y eso quiere decir que no existe alguno de los lados, la podemos representar 0:N
+        ejemplo:
+            paciente tiene habitacion_hospital
+            el hospital tiene 0 pacientes para muchas habitaciones
+            y se representa así:
+            --|-------<-
+            con la línea punteada para indicar que es opcional, o así:
+            __|0_______________<__
+              |                
 ***Clase 6 Múltiples muchos***
 
-
+    N:N
+        relación de muchos a muchos
+        ejemplo:
+            alumno(1) pertenece a (N)clases
+            alumno(N) pertenece a (1)clases
+        se lo puede representar N:N
 
 ***Clase 7 Diagrama ER***
 
+Un diagrama es como un mapa y nos ayuda a entender cuáles son las entidades con las que vamos a trabajar, 
+cuáles son sus relaciones y qué papel van a jugar en las aplicaciones de la base de datos.
 
+muchas veces un atributo multivaluado se convierte en una entidad separada, porque si está en muchas partes toma una vida propia
+
+Diagrama Entidad Relación de PlatziBlog:
+
+    usuarios(1) escribe (N)comentarios
+    usuarios(1) escribe (N)posts 
+    posts(1) tiene (N)comentarios
+    posts(N) tiene (1)categorias
+    posts(N) tiene (N)etiquetas
 
 ***Clase 8 Diagrama Físico:  tipos de datos y constraints***
 
+Texto: 
+    Char(n): Este sirve para guardar cadenas de caracteres
+    Varchar(n): Este sirve para guardar cadenas de caracteres pero es más dinámico que CHAR la diferencia es la optimización del uso de memoria,
+        y si por ejemplo siempre vamos a tener una cadena de 8 caracteres la podemos guardar con un char, pero si la cadena va crecer más se usa varchar
+    Text: Sirve para guardar grandes contenidos de texto muy grandes
+Números: 
+    Integer(n): Para guardar números enteros
+    Bigint(n): Es un subtipo de Integer y sirve para guardar números muy muy grandes
+    Smallint(n): Es un subtipo de Integer y sirve para guardar números pequeños por ejemplo de 99 o menos
+    Decimal(n,s): para guardar números decimales
+    Numeric(n,s): 
+Fecha/Hora: 
+    Date:  Para guardar unicamente la fecha 
+    Time: Para guardar unicamente la hora
+    Datetime:  Para guardar la fecha, hora y hasta segundos
+    Timestamp: Para guardar la fecha, hora y hasta segundos
+Lógicos: 
+    Boolean: Para guardar True o False, 0 o 1, y se usa para hacer validación entre dos cosas
 
+Constraints(restricciones)
+- Not null: Se aegura que la columna no tenga valores nulos, es decir, que ese campo no puede ir vacio o en blanco, y si quieren pasarle un dato así, les da error
+- Unique: Se asegura que cada valor en la columna no se repita, es decir, que es uníco en toda la tabla, que solo existe uno con ese valor en la tabla
+- Primary Key: Es una combinación de Not Null y Unique, este es una de las más importantes, y cuando colocamos este enla base de datos vamos a tener la garantía
+    de que ese campo va ser not null y unique, además nos ayuda a hacer la unión entre una tabla y otra, ó entre una entidad y otra
+    es la que en realidad nos ayuda a hacer las relaciones entre entidades
+- Foreign Key: Identifica de manera única una tupla en otra tabla, quiere decir llave foránea y es el otro lado de la primary key, y se usa cuando queremos juntar dos tablas
+    y decir que esta tabla está relacionada con esta otra lo que hacemos es que la primary key de una tabla se añade como Foreign key en la otra,y debe tener las mismas
+    características de la primary key
+- Check: Se asegura que el valor en la columna cumpla una condición dada, nos permite generar una regla 
+- Default: Coloca un valor por defecto cuando no hay un valor específico, por ejemplo si no viene un valor podemos decir que por defecto traiga un valor 0
+- Index: Se crea por columna para permitir búsquedas más rápidas, hay que saber trabajarlos porque genera confusiones
 
 ***Clase 9 Diagrama Físico: normalización***
 
