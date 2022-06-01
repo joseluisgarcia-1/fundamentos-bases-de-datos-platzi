@@ -441,7 +441,7 @@ sudo apt-get install mysql-server
 
 ***Clase 16 Clientes gráficos***
 
-
+Fue una clase para familiarizarnos con MySQL, cómo crear una instancia, esquemas, entre otros apuntes
 
 ***Clase 17 Servicios administrados***
 
