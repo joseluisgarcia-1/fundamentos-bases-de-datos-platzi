@@ -32,48 +32,365 @@ Introducción a las bases de datos relacionales
 ***Clase 2 Historia de las bases de datos relacionales***
 - Para leer:
     https://aukera.es/blog/bases-de-datos-relacionales-vs-no-relacionales/
+Las bases de datos surgen de la necesidad de conservar la información más allá de lo que existe en la memoria RAM.
+
+Las bases de datos basadas en archivos eran datos guardados en texto plano, fáciles de guardar pero muy difíciles de consultar y por la necesidad de mejorar esto nacen las bases de datos relacionales. 
+Su inventor Edgar Codd dejó ciertas reglas para asegurarse de que toda la filosofía de las bases de datos no se perdiera, estandarizando el proceso.
+
+Recomendado de la clase:
+https://www.w3resource.com/sql/sql-basic/codd-12-rule-relation.php
+https://www.mindmeister.com/es/1079684487/las-12-reglas-de-codd-del-modelo-relacional?fullscreen=1
+
+Las 12 reglas de Codd: fuente
+
+Regla 0: Regla de fundación.
+Regla 1: Regla de la información.
+Regla 2: Regla del acceso garantizado.
+Regla 3: Regla del tratamiento sistemático de valores nulos.
+Regla 4: Catálogo dinámico en línea basado en el modelo relacional.
+Regla 5: Regla comprensiva del sublenguaje de los datos.
+Regla 6: regla de actualización de vistas.
+Regla 7: alto nivel de inserción, actualización, y cancelación.
+Regla 8: Independencia física de los datos.
+Regla 9: Independencia lógicas de los datos.
+Regla 10: Independencia de la integridad.
+Regla 11: Independencia de la distribución.
+Regla 12: La regla de la no subversión.
 
 ***Clase 3 Entidades y atributos***
 
+En este ejemplo o curso, cuando un atributo se lo encierra en dos circulos o doble óvalo se está diciendo que es un atributo multivaluado entonces significado
+que tiene más de un valor o multiples valores
+
+- Atributos compuestos porque están compuestos valga la aclaración por otros atributos
+- Por convención las entidades se colocan en plural, porque una entidad representa un grupo de estos objetos
+- Cuando un atributo tiene un guión debajo del nombre o el nombre subrayado, es un atributo que dentro de la entidad se va identificar de forma única
+entonces lo identifican de manera única dentro del conjunto o de la entidad
+- Entidad fuerte:
+    ejemplo:
+        Libro
+- Entidades débiles:
+    - Se representan con un cuadrado pero tienen doble línea, estas entidades pueden ser débiles por dos motivos, uno por identidad y otro por existencia
+    las entidades débiles por identidad quiere decir que no se se diferencian entre sí más que por la clave de su entidad fuerte
+        ejemplo:
+            ejemplares del libro que es la entidad fuerte
 
 
 ***Clase 4 Entidades de Platzi Blog***
 
+Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos representará retos muy interesantes.
 
+- Las entidades recordar que convencionalmente se escriben en plural
+    ejemplo de entidad -> post, y sus atributos:
+        entidad: posts
+        atributos: título, fecha_publicación, contenido, status, etiquetas(atributo multivaluado), id(atributo que dentro de la entidad se va identificar de forma única)  
+    ejemplo de entidad -> usuarios, y sus atributos:
+        entidad: usuarios
+        atributos: login, password, apodo, username, email, id(atributo que dentro de la entidad se va identificar de forma única)
+
+Primer paso: Identificar las entidades
+Segundo paso: Pensar en los atributos
 
 ***Clase 5 Relaciones***
 
+- Las relaciones es la manera en que empezamos a ligar nuestras diferentes entidades u objetos
+    ejemplos:
+        las relaciones se representan con un rombo
 
+ejemplo:
+----------            ---------
+automóvil ----|tiene|--- dueño
+----------            ---------
+----------                ---------
+jugador    ----|pertenece|--- equipo
+----------                ---------
 
+Las relaciones nos permiten ligar o unir nuestras diferentes entidades y se representan con rombos. 
+Por convención se definen a través de verbos.
+
+Las relaciones tienen una propiedad llamada cardinalidad y tiene que ver con números. 
+Cuántos de un lado pertenecen a cuántos del otro lado:
+
+Cardinalidad: 1 a 1
+Cardinalidad: 0 a 1
+Cardinalidad: 1 a N
+Cardinalidad: 0 a N
+
+- ejemplos de cada cardinalidad:
+    1 a 1:
+        (1)persona tiene (1)datos_contacto
+        (1)datos_contacto pertenecen a (1)persona
+        por eso decimos que es una relación de 1 a 1 y la podemos representan así: 1:1
+        en diagramas físicos los vamos a encontrar así: 
+        __|_______________|__
+          |               |
+y en este también lo representa y se entiende como: 1 y sólo 1 de un lado y 1 y sólo 1 del otro lado     
+        _||_______________||_
+         ||               ||
+          
+    0 a 1:
+
+        algunos autores la discuten, sin embargo, se la conoce como 1 a 1 opcional y eso queire decir que no existe alguno de los lados, la podemos representar 0:1
+        ejemplo:
+            sesion_actual tiene usuario
+            la sesion_actual debe tener un usuario, pero el usuario puede que no esté en la sesión en este momento, por lo tanto la cardinalidad se define de 0:1
+            y se representa así:
+            --|-------|--
+            con la línea punteada para indicar que es opcional, o así:
+            __|0_______________|__
+              |                |
+            
+    1 a N:
+        cabe aclara que índica que en un lado tenemos uno(1) y en otro lado tenemos muchos(N)
+            ejemplo:
+                persona(1) tiene (N)automóvil
+                (1)persona tiene automóvil(N)
+                (N)muchos automóviles pertenecen a (1)persona
+                
+                y se representa así:
+            __|_______________0<__
+              |                                
+              (pate gallina al final)
+            __|_______________<__
+              |                 
+              (pate gallina al final)
+            _||_______________|<_
+             ||               |
+            (pate gallina al final)
+
+    0 a N:
+
+        algunos autores también la discuten, sin embargo, se la conoce como 0 a N opcional y eso quiere decir que no existe alguno de los lados, la podemos representar 0:N
+        ejemplo:
+            paciente tiene habitacion_hospital
+            el hospital tiene 0 pacientes para muchas habitaciones
+            y se representa así:
+            --|-------<-
+            con la línea punteada para indicar que es opcional, o así:
+            __|0_______________<__
+              |                
 ***Clase 6 Múltiples muchos***
 
-
+    N:N
+        relación de muchos a muchos
+        ejemplo:
+            alumno(1) pertenece a (N)clases
+            alumno(N) pertenece a (1)clases
+        se lo puede representar N:N
 
 ***Clase 7 Diagrama ER***
 
+Un diagrama es como un mapa y nos ayuda a entender cuáles son las entidades con las que vamos a trabajar, 
+cuáles son sus relaciones y qué papel van a jugar en las aplicaciones de la base de datos.
 
+muchas veces un atributo multivaluado se convierte en una entidad separada, porque si está en muchas partes toma una vida propia
+
+Diagrama Entidad Relación de PlatziBlog:
+
+    usuarios(1) escribe (N)comentarios
+    usuarios(1) escribe (N)posts 
+    posts(1) tiene (N)comentarios
+    posts(N) tiene (1)categorias
+    posts(N) tiene (N)etiquetas
 
 ***Clase 8 Diagrama Físico:  tipos de datos y constraints***
 
+Texto: 
+    Char(n): Este sirve para guardar cadenas de caracteres
+    Varchar(n): Este sirve para guardar cadenas de caracteres pero es más dinámico que CHAR la diferencia es la optimización del uso de memoria,
+        y si por ejemplo siempre vamos a tener una cadena de 8 caracteres la podemos guardar con un char, pero si la cadena va crecer más se usa varchar
+    Text: Sirve para guardar grandes contenidos de texto muy grandes
+Números: 
+    Integer(n): Para guardar números enteros
+    Bigint(n): Es un subtipo de Integer y sirve para guardar números muy muy grandes
+    Smallint(n): Es un subtipo de Integer y sirve para guardar números pequeños por ejemplo de 99 o menos
+    Decimal(n,s): para guardar números decimales
+    Numeric(n,s): 
+Fecha/Hora: 
+    Date:  Para guardar unicamente la fecha 
+    Time: Para guardar unicamente la hora
+    Datetime:  Para guardar la fecha, hora y hasta segundos
+    Timestamp: Para guardar la fecha, hora y hasta segundos
+Lógicos: 
+    Boolean: Para guardar True o False, 0 o 1, y se usa para hacer validación entre dos cosas
 
+Constraints(restricciones)
+- Not null: Se aegura que la columna no tenga valores nulos, es decir, que ese campo no puede ir vacio o en blanco, y si quieren pasarle un dato así, les da error
+- Unique: Se asegura que cada valor en la columna no se repita, es decir, que es uníco en toda la tabla, que solo existe uno con ese valor en la tabla
+- Primary Key: Es una combinación de Not Null y Unique, este es una de las más importantes, y cuando colocamos este enla base de datos vamos a tener la garantía
+    de que ese campo va ser not null y unique, además nos ayuda a hacer la unión entre una tabla y otra, ó entre una entidad y otra
+    es la que en realidad nos ayuda a hacer las relaciones entre entidades
+- Foreign Key: Identifica de manera única una tupla en otra tabla, quiere decir llave foránea y es el otro lado de la primary key, y se usa cuando queremos juntar dos tablas
+    y decir que esta tabla está relacionada con esta otra lo que hacemos es que la primary key de una tabla se añade como Foreign key en la otra,y debe tener las mismas
+    características de la primary key
+- Check: Se asegura que el valor en la columna cumpla una condición dada, nos permite generar una regla 
+- Default: Coloca un valor por defecto cuando no hay un valor específico, por ejemplo si no viene un valor podemos decir que por defecto traiga un valor 0
+- Index: Se crea por columna para permitir búsquedas más rápidas, hay que saber trabajarlos porque genera confusiones
 
 ***Clase 9 Diagrama Físico: normalización***
 
+La normalización como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las 12 reglas de Codd y nos permiten separar componentes en la base de datos:
+
+Primera forma normal (1FN): Atributos atómicos (Sin campos repetidos)
+Segunda forma normal (2FN): Cumple 1FN y cada campo de la tabla debe depender de una clave única.
+Tercera forma normal (3FN): Cumple 1FN y 2FN y los campos que NO son clave, NO deben tener dependencias.
+Cuarta forma normal (4FN): Cumple 1FN, 2FN, 3FN y los campos multivaluados se identifican por una clave única.
 
 
 ***Clase 10 Formas normales en Bases de Datos relacionales***
 
+La normalización en las bases de datos relacionales es uno de esos temas que, por un lado es sumamente importante y por el otro suena algo esotérico. Vamos a tratar de entender las formas normales (FN) de una manera simple para que puedas aplicarlas en tus proyectos profesionales.
 
+Primera Forma Normal (1FN)
+Esta FN nos ayuda a eliminar los valores repetidos y no atómicos dentro de una base de datos.
+
+Formalmente, una tabla está en primera forma normal si:
+
+Todos los atributos son atómicos. Un atributo es atómico si los elementos del dominio son simples e indivisibles.
+No debe existir variación en el número de columnas.
+Los campos no clave deben identificarse por la clave (dependencia funcional).
+Debe existir una independencia del orden tanto de las filas como de las columnas; es decir, si los datos cambian de orden no deben cambiar sus significados.
+Se traduce básicamente a que si tenemos campos compuestos como por ejemplo “nombre_completo” que en realidad contiene varios datos distintos, en este caso podría ser “nombre”, “apellido_paterno”, “apellido_materno”, etc.
+
+También debemos asegurarnos que las columnas son las mismas para todos los registros, que no haya registros con columnas de más o de menos.
+
+Todos los campos que no se consideran clave deben depender de manera única por el o los campos que si son clave.
+
+Los campos deben ser tales que si reordenamos los registros o reordenamos las columnas, cada dato no pierda el significado.
+
+Segunda Forma Normal (2FN)
+Esta FN nos ayuda a diferenciar los datos en diversas entidades.
+
+Formalmente, una tabla está en segunda forma normal si:
+
+Está en 1FN
+Sí los atributos que no forman parte de ninguna clave dependen de forma completa de la clave principal. Es decir, que no existen dependencias parciales.
+Todos los atributos que no son clave principal deben depender únicamente de la clave principal.
+Lo anterior quiere decir que sí tenemos datos que pertenecen a diversas entidades, cada entidad debe tener un campo clave separado. Por ejemplo:
+Captura de Pantalla 2019-04-30 a la(s) 17.30.27.png
+
+En la tabla anterior tenemos por lo menos dos entidades que debemos separar para que cada uno dependa de manera única de su campo llave o ID. En este caso las entidades son alumnos por un lado y materias por el otro. En el ejemplo anterior, quedaría de la siguiente manera:
+Captura de Pantalla 2019-04-30 a la(s) 17.26.28.png
+
+Tercera Forma Normal (3FN)
+Esta FN nos ayuda a separar conceptualmente las entidades que no son dependientes.
+
+Formalmente, una tabla está en tercera forma normal si:
+
+Se encuentra en 2FN
+No existe ninguna dependencia funcional transitiva en los atributos que no son clave
+
+Esta FN se traduce en que aquellos datos que no pertenecen a la entidad deben tener una independencia de las demás y debe tener un campo clave propio. Continuando con el ejemplo anterior, al aplicar la 3FN separamos la tabla alumnos ya que contiene datos de los cursos en ella quedando de la siguiente manera.
+
+Captura de Pantalla 2019-04-30 a la(s) 17.27.43.png
+Captura de Pantalla 2019-04-30 a la(s) 17.27.52.png
+Cuarta Forma Normal (4FN)
+Esta FN nos trata de atomizar los datos multivaluados de manera que no tengamos datos repetidos entre rows.
+
+Formalmente, una tabla está en cuarta forma normal si:
+
+Se encuentra en 3FN
+Los campos multivaluados se identifican por una clave única
+Esta FN trata de eliminar registros duplicados en una entidad, es decir que cada registro tenga un contenido único y de necesitar repetir la data en los resultados se realiza a través de claves foráneas.
+
+Aplicado al ejemplo anterior la tabla materia se independiza y se relaciona con el alumno a través de una tabla transitiva o pivote, de tal manera que si cambiamos el nombre de la materia solamente hay que cambiarla una vez y se propagara a cualquier referencia que haya de ella.
+
+Captura de Pantalla 2019-04-30 a la(s) 17.29.00.png
+Captura de Pantalla 2019-04-30 a la(s) 17.29.29.png
+
+De esta manera, aunque parezca que la información se multiplicó, en realidad la descompusimos o normalizamos de manera que a un sistema le sea fácil de reconocer y mantener la consistencia de los datos.
+
+Algunos autores precisan una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.
 
 ***Clase 11 Diagrama Físico: normalizando Platziblog***
 
+- lo escribí en un cuaderno el diagrama, sin embargo, debo buscar donde hacer el diagrama
+- Siempre la llave foranea va quedar donde está la relación de muchos(N)
 
+ejemplos de entidades con sus respectivos atributos:
+    usuarios:
+        id INTEGER(PK)
+        login VARCHAR(30)NN
+        password VARCHAR(32)NN
+        nickname VARCHAR(40)NN
+        email VARCHAR(40) UNIQUE
+    el NN es: Not Null
+    posts:
+        id INTEGER(PK)
+        título VARCHAR(150)
+        fecha_publicación TIMESTAMP
+        contenido TEXT
+        status CHAR(8) CHECK IN('activo', 'inactivo')
+    comentarios:
+        id INTEGER(PK)
+        comentario TEXT
+    categorias:
+        id INTEGER(PK)
+        categoria VARCHAR(30)
+    etiquetas:
+        id INTEGER(PK)
+        nombre_etiqueta VARCHAR(30) 
+
+Ahora, cuando se empiezan a hacer las relaciones entre las entidades, se agrega las claves de usuario, Foreign Key(llave foránea)
+entonces en las tablas de posts y de usuarios van a aparecer las Foreign Key(llaves foraneas) eso pasa cuando relacionamos las Entidades
+con líneas y en la base de datos lo que pasa es que se añade la clave única digamos del usuario como clave foranea en la otra tabla
+en el caso de posts tenemos que se nos agregó usuarios_id INTEGER FK que es justamente la llave foranea que viene referenciando el id del usuario que lo creó
+y en comentarios también tenemos el usuarios_id INTEGER FK que es justamente la llave foranea que viene referenciando el id del usuario que lo creó
+
+- Cuando tengamos de 1:1 no importa a qué tabla le pongamos la referencia de la otra tabla es indistinto
+- Cuando tengamos de 1:N es importante que la tabla donde tengamos la terminación muchos es en donde se pone la llave foranea de la tabla que tiene 1
+    por eso tenemos el ejemplo de posts y comentarios REVISAR
+
+- también tenemos el ejemplo de posts(N) tiene (1)categorias, entonces colocamos la llave foranea en la tabla de posts
+
+    usuarios:
+        id INTEGER(PK)
+        login VARCHAR(30)NN
+        password VARCHAR(32)NN
+        nickname VARCHAR(40)NN
+        email VARCHAR(40) UNIQUE
+    el NN es: Not Null
+    posts:
+        id INTEGER(PK)
+        título VARCHAR(150)
+        fecha_publicación TIMESTAMP
+        contenido TEXT
+        status CHAR(8) CHECK IN('activo', 'inactivo')
+        usuarios_id INTEGER FK
+        categorias_id INTEGER FK
+    comentarios:
+        id INTEGER(PK)
+        comentario TEXT
+        usuarios_id INTEGER FK
+        posts_id INTEGER FK
+    categorias:
+        id INTEGER(PK)
+        categoria VARCHAR(30)
+    etiquetas:
+        id INTEGER(PK)
+        nombre_etiqueta VARCHAR(30) 
+
+- EXCEPCIÓN: N:N la unión de dos entidades que tienen relación de muchos a muchos,
+    ejemplo: posts y etiquetas, qué pasa en este caso?
+        esa relación de muchos a muchos lo que pasa es que se rompe y coloca una tabla intermedia, y a esa tabla muchas veces se le llama tabla pivote
+        y nos ayuda justamente a mirar cual es la relación enre ambas entidades
+    y queda así una tabla así:
+
+    posts_etiquetas
+    post_id INTEGER(PK, FK)
+    etiqueta_id INTEGER(PK, FK)
 
 RDBMS (MySQL) o cómo hacer lo anterior de manera práctica
 
 ***Clase 12 ¿Qué es RDB y RDBMS?***
 
-
+RDB: Relational Database(Bases de datos relacionales)
+RDBMS: Relational Database Management System (Sistema manejador de bases de datos relacionales)
+este nos ayuda a cumplir las reglas
+ejemplos de RDBMS:
+    Mysql
+    PostsgreSQL
+    Oracle
 
 ***Clase 13 Instalación local de un RDBMS (Windows)***
 
@@ -304,3 +621,8 @@ Bonus
 
 
 ***Clase 58 Elegir una base de datos***
+
+apuntes:
+
+Claro que si, mira, como el editor me pide una URL yo subo la imagen en https://imgur.com/ y la página me da la URL de la imagen
+que es la que coloco en el editor. Mucha suerte, amigo.
