@@ -482,6 +482,9 @@ Ahora existe el NOSQL o Not Only Structured Query Language que significa que no 
 
 ***Clase 19 DDL create***
 
+No está de más aclarar que primero se debe crear la base de datos o schema y luego ir a tables y darle en crear tabla, pero ahí nos da la opción
+de crearla manualmente por así decirlo y no con código.
+
 Data Definition Language(Lenguaje de definición de datos):
     - Este nos ayuda a crear la estructura de una base de datos, los cimientos, relaciones, entidades
 
@@ -525,6 +528,17 @@ Drop: Nos ayuda a borrar. Hay que tener cuidado al utilizarlo.
 
 - AI: Auto Incrementado(Auto Increment), lo que quiere decir que cada que agregamos una persona va tomar un valor automáticamente y en secuencia
 - Q: UNIQUE
+
+
+por si queremos hacer la creación de la tabla desde código, quedaría así:
+
+CREATE TABLE `platziblog`.`people` (
+  `persona_id` INT NOT NULL AUTO_INCREMENT,
+  `last_name` VARCHAR(100) NOT NULL,
+  `first_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `city` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`persona_id`));
 
 ***Clase 20 CREATE VIEW y DDL ALTER***
 
