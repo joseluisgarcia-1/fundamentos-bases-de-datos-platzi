@@ -485,9 +485,9 @@ Ahora existe el NOSQL o Not Only Structured Query Language que significa que no 
 Data Definition Language(Lenguaje de definición de datos):
     - Este nos ayuda a crear la estructura de una base de datos, los cimientos, relaciones, entidades
 
-Create: Se puede usar el create para crear una base de datos, esquema(schema), tabla, vista, índice, entre otros
-Alter: Con este se puede alterar o modificar datos como tablas, agregando columna o quitando, ó cambiando tipo de dato de la columna, entre otros.
-Drop: Aunque es de mucho cuidado, con este se puede borrar columnas, una tabla, e incluso toda una base de datos.
+- Create: Se puede usar el create para crear una base de datos, esquema(schema), tabla, vista, índice, entre otros
+- Alter: Con este se puede alterar o modificar datos como tablas, agregando columna o quitando, ó cambiando tipo de dato de la columna, entre otros.
+- Drop: Aunque es de mucho cuidado, con este se puede borrar columnas, una tabla, e incluso toda una base de datos.
 Lo que se va manejar con el lenguaje DDL por ejemplo son:
     Database: Repositorio de datos que va usar un proyecto
     Table: Son la proyección o la traducción a SQL de las entidades, tanto de entidad relación como el diagrama físico
@@ -510,6 +510,19 @@ CREATE TABLE people(
 );
 
 En el MySQL, en el servidor el significado de los datos que toman los atributos:
+
+SQL tiene dos grandes sublenguajes:
+DDL o Data Definition Language que nos ayuda a crear la estructura de una base de datos. Existen 3 grandes comandos:
+
+Create: Nos ayuda a crear bases de datos, tablas, vistas, índices, etc.
+Alter: Ayuda a alterar o modificar entidades.
+Drop: Nos ayuda a borrar. Hay que tener cuidado al utilizarlo.
+3 objetos que manipularemos con el lenguaje DDL:
+
+Database o bases de datos
+Table o tablas. Son la traducción a SQL de las entidades
+View o vistas: Se ofrece la proyección de los datos de la base de datos de forma entendible.
+
 - AI: Auto Incrementado(Auto Increment), lo que quiere decir que cada que agregamos una persona va tomar un valor automáticamente y en secuencia
 
 ***Clase 20 CREATE VIEW y DDL ALTER***
