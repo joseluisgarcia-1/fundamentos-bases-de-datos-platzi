@@ -445,6 +445,20 @@ Fue una clase para familiarizarnos con MySQL, cómo crear una instancia, esquema
 
 ***Clase 17 Servicios administrados***
 
+Hoy en día muchas empresas ya no tienen instalado en su servidor los RDBMS si no que los contratan a otras personas y estos servicios se les llama
+servicios cloud o servicios administrados, lo que significa que un servicio cloud, la empresa no se ocupa realmente de administrar la base de datos
+colocarles parches de seguridad, mantenerla, computadores, entre otros requerimientos.
+Algunos de los servicios donde podemos encontrar ello es con:
+    - Amazon - Aws
+    - Azure - Microsoft
+    - Google cloud
+    - etc.
+Muchos de los servicios ya están dirigidos más a empresa que ha desarrolladores, aunque para desarrolladores dan una prueba gratuita bastante amplia, y cuando
+ya se tiene mucha información o mucho uso de esa app, entonces empiezan a cobrar
+
+Enlace donde vamos a practicar con ese servicio administrado
+https://cloud.google.com/cloud-console
+aunque no me dejó ingresar porque no tengo tarjeta de crédito :(
 SQL hasta en la sopa
 
 ***Clase 18 Historia de SQL***
@@ -460,7 +474,7 @@ es que es estructurado, es decir, tiene un estructura muy clara y fija.
 
 Hoy en día aunque hay bases de datos no relacionales, y aunque usan un lenguaje un poco más amplío que el SQL, como base siguen teniendo SQL
 por ejemplo:
-    Cassandra
+    Cassandra: Tiene un lenguaje que se llama cql que es muy similar a sql
 
 ***Clase 19 DDL create***
 
