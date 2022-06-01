@@ -520,10 +520,11 @@ Drop: Nos ayuda a borrar. Hay que tener cuidado al utilizarlo.
 3 objetos que manipularemos con el lenguaje DDL:
 
 Database o bases de datos
-Table o tablas. Son la traducción a SQL de las entidades
+Table o tablas: Son la traducción a SQL de las entidades
 View o vistas: Se ofrece la proyección de los datos de la base de datos de forma entendible.
 
 - AI: Auto Incrementado(Auto Increment), lo que quiere decir que cada que agregamos una persona va tomar un valor automáticamente y en secuencia
+- Q: UNIQUE
 
 ***Clase 20 CREATE VIEW y DDL ALTER***
 
