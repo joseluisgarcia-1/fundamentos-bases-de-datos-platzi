@@ -1,12 +1,37 @@
 Bienvenida conceptos básicos y contexto histórico de las Bases de Datos
 
 ***Clase 1 Bienvenida conceptos básicos y contexto histórico de las Bases de Datos***
+- Recomendado:
+    https://aukera.es/blog/bases-de-datos-relacionales-vs-no-relacionales/
+
+El almacenamiento en la nube tiene un gran pro comparada con los otros métodos de almacenamiento ya que es accesible desde cualquier parte del mundo. Además es centralizada y puede ser usada por varias personas al mismo tiempo.
+
+Las bases de datos entran cuando hacemos la transición a medios digitales.
+
+Tipos de bases de datos:
+
+Relacionales: En la industria hay varias compañías dedicadas a ser manejadoras de 
+    bases de datos relacionales como: 
+        SQL Server, Oracle, MariaDB, entre otras.
+No relacionales: Todavía están avanzando y existen ejemplos muy distintos 
+    como: 
+        cassandra, elasticsearch, neo4j, MongoDB, entre otras.
+
+Servicios:
+
+Auto administrados: Es la base de datos que instalas tú y te encargas de actualizaciones, mantenimiento, etc.
+Administrados: Servicios que ofrecen las nubes modernas como Azure y no debes preocuparte por mantenimiento o actualizaciones.
+
+Medios digitales:
+    - Discos duros
+    - Discos de estado sólido
+    - Cds
 
 Introducción a las bases de datos relacionales
 
 ***Clase 2 Historia de las bases de datos relacionales***
-
-
+- Para leer:
+    https://aukera.es/blog/bases-de-datos-relacionales-vs-no-relacionales/
 
 ***Clase 3 Entidades y atributos***
 
@@ -72,11 +97,50 @@ SQL hasta en la sopa
 
 ***Clase 18 Historia de SQL***
 
+SQL: Structure Query Language(Lenguaje de consultas estructurado)
+NOSQL: Not Only Structure Query Language(No uses solo lenguaje de consultas estructurado)
 
+Se crea en un momento en el que trataban de hacer consultas a datos pero no existia una forma realmente estandarizada de hacerlo
+entonces por eso se crea SQL, y el objetivo es hacer un solo lenguaje para consultar y no importa el manejador de bases de datos que tengamos
+trata de unificarlos todos. Se crea porque las compañías tenían su RDBMS pero no sabían como comunicarse entre ellos y el tratar de programar algo 
+que permite la comunicación resultaba muy tedioso, entonces debido a eso se crea el SQL, y una de sus características más importantes 
+es que es estructurado, es decir, tiene un estructura muy clara y fija.
+
+Hoy en día aunque hay bases de datos no relacionales, y aunque usan un lenguaje un poco más amplío que el SQL, como base siguen teniendo SQL
+por ejemplo:
+    Cassandra
 
 ***Clase 19 DDL create***
 
+Data Definition Language(Lenguaje de definición de datos):
+    - Este nos ayuda a crear la estructura de una base de datos, los cimientos, relaciones, entidades
 
+Create: Se puede usar el create para crear una base de datos, esquema(schema), tabla, vista, índice, entre otros
+Alter: Con este se puede alterar o modificar datos como tablas, agregando columna o quitando, ó cambiando tipo de dato de la columna, entre otros.
+Drop: Aunque es de mucho cuidado, con este se puede borrar columnas, una tabla, e incluso toda una base de datos.
+Lo que se va manejar con el lenguaje DDL por ejemplo son:
+    Database: Repositorio de datos que va usar un proyecto
+    Table: Son la proyección o la traducción a SQL de las entidades, tanto de entidad relación como el diagrama físico
+    View: Es la proyección de los datos de la base de datos de una forma visual entendible para alguien
+- Para crear base de datos es así:
+    CREATE DATABASE test_db; 
+    USE DATABASE test_db;
+    test_db es el nombre de la base de datos
+    en el primero estamos creando una base de datos
+    y en el USE DATABASE test_db lo que decimos es que queremos usar esa base de datos por defecto
+
+- Para crear una tabla tenemos el siguiente ejemplo:
+    people será el nombre de la tabla
+CREATE TABLE people(
+    persona_id int,
+    last_name varchar(255),
+    firts_name varchar(255),
+    address varchar(255),
+    city varchar(255),
+);
+
+En el MySQL, en el servidor el significado de los datos que toman los atributos:
+- AI: Auto Incrementado(Auto Increment), lo que quiere decir que cada que agregamos una persona va tomar un valor automáticamente y en secuencia
 
 ***Clase 20 CREATE VIEW y DDL ALTER***
 
