@@ -394,15 +394,50 @@ ejemplos de RDBMS:
 
 ***Clase 13 Instalación local de un RDBMS (Windows)***
 
-
+https://dev.mysql.com/downloads/workbench/
+https://dev.mysql.com/downloads/mysql/5.7.html
 
 ***Clase 14 Instalación local de un RDBMS (Mac)***
 
-
+https://platzi.com/clases/1566-bd/20207-instalacion-local-de-un-rdbms-mac5139/
+tener en cuenta que el workbench hay que descargarlo aparte
 
 ***Clase 15 Instalación local de un RDBMS (Ubuntu)***
 
+Visita la dirección de descarga de la versión de comunidad de MySql
+https://dev.mysql.com/downloads/mysql/5.7.html#downloads
 
+Dirígete a la sección de selección de descargas y selecciona tu distribución de Linux. En nuestro caso Ubuntu y selecciona posteriormente la versión que estás utilizando actualmente, en nuestro caso 18.04 de 64 bits.
+Captura de Pantalla 2019-04-30 a la(s) 17.35.57.png
+
+Más abajo encontrarás las diferentes opciones de descarga existen diversos paquetes dependiendo tus necesidades. En el caso del ejemplo usaremos la versión deb bundle. Da click en el botón Download seleccionado.
+Captura de Pantalla 2019-05-14 a la(s) 19.13.24.png
+
+En la siguiente pantalla nos piden que nos registremos o iniciemos sesión, pero ya que solo queremos la descarga daremos click en el link que se encuentre en la parte de abajo.
+Captura de Pantalla 2019-04-30 a la(s) 17.36.25.png
+
+Espera a que la descarga concluya.
+Al terminar abre el archivo .tar con el desempaquetador de tu preferencia.
+Captura de Pantalla 2019-04-30 a la(s) 17.36.37.png
+
+Extrae el contenido en la carpeta de tu preferencia.
+Captura de Pantalla 2019-04-30 a la(s) 17.36.48.png
+
+Selecciona el archivo de servidor de comunidad y ábrelo con tu manejador de paquetes instalado.
+Captura de Pantalla 2019-04-30 a la(s) 17.36.59.png
+Captura de Pantalla 2019-04-30 a la(s) 17.37.07.png
+
+Da click en instalar.
+Finalmente puedes ir a la consola o terminal de Ubuntu y escribir el siguiente comando.
+sudo mysql
+Captura de Pantalla 2019-04-30 a la(s) 17.37.15.png
+
+A continuación deberá aparecer una ventana con el prompt de mysql donde ya puedes comenzar a ejecutar los comandos de las lecciones.
+
+Captura de Pantalla 2019-04-30 a la(s) 17.37.22.png
+Nota: recuerda estar seguro que las dependencias para el paquete se cumplen para instalar.
+Nota: muchas veces las distribuciones ya cuentan con paquetes en su repositorio, en ese caso también puedes ejecutar el comando:
+sudo apt-get install mysql-server
 
 ***Clase 16 Clientes gráficos***
 
