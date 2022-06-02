@@ -542,7 +542,63 @@ CREATE TABLE `platziblog`.`people` (
 
 ***Clase 20 CREATE VIEW y DDL ALTER***
 
+Views(vistas): Tienen que ver con un concpeto avanzado y útil, las vistas lo que hacen es tomar datos de la base de datos y colocarlos en una forma presentable
+y convertir en algo que se pueda consultar de manera recurrente, el comando CREATE VIEW tiene dos partes principales
+    la primera: luego del CREATE VIEW Asignarle el nombre a la vista y por buena práctica cuando se está creando una vista al nombre de la vista se le coloca una v
+    en el nombre para identificar que es una vista lo que se tiene, entonces ejemplo de ese nombre: v_colombia_people
 
+IMPORTANTE:
+
+Como la base de datos que yo tenía para hacer la prueba de la vista no tenía datos, le coloqué datos desde código y usé la siguiente estructura
+
+INSERT INTO people(persona_id, last_name, first_name, address, city)
+VALUES ('1', 'Vázquez', 'Israel', 'Calle famosa num 1', 'México'), 
+('2','Hernández','Mónica','Reforma 222','México'), 
+('3','Alanís','Edgar','Central 1','Monterrey');
+
+y con eso me insertó los datos en la tabla y ya pasé a hacer la prueba de la vista
+
+Los pasos para crear la vista fueron los siguientes:
+a la tabla que tiene los datos que en este ejemplo fue people le dí click derecho, y seleccioné "Select rows 1000" cuando le doy ahí
+me lleva a la tabla donde tengo los datos y en el espacio de trabajo donde puedo codear me sale lo siguiente
+SELECT * FROM platziblog.people; y eso lo copio 
+2. de ahí me voy a views en el panel del lado izquiedo, doy click derecho y selecciono create view y eso nos lleva donde se puede codear
+y nos coloca un nombre de la vista por defecto el cual vamos a cambiar por el nombre que queramos, y la palabra AS si la dejamos, 
+luego pegamos la secuencia select que copiamos antes entonces quedaría algo así:
+CREATE VIEW `platzi_people` AS
+SELECT * FROM platziblog.people;
+despues de ello, le damos en apply y nos arroja lo siguiente:
+
+USE `platziblog`;
+CREATE  OR REPLACE VIEW `platzi_people` AS
+SELECT * FROM platziblog.people;
+
+y con eso queda la tabla en la tabla vistas con la información
+
+En las vistas se puede guardar información de varias tablas y obtener la información exacta, y tiene la gran ventaja
+de que estas vistas se mantienen en memoria de tal manera que podemos mantener esta vista al día
+
+- ALTER
+ejemplos:
+    En este caso le estamos diciendo que se agregue una columna que se llame date_of_birth con el tipo date
+        ALTER TABLE people
+        ADD date_of_birth date;
+
+    En este caso le estamos diciendo que se altere o modifique el tipo de dato que tiene la columna date_of_birth por year
+        ALTER TABLE people
+        ALTER COLUMN date_of_birth year;
+
+    En este caso le estamos diciendo que elimine la columna date_of_birth
+        ALTER TABLE people
+        DROP COLUMN date_of_birth;
+
+Entonces en práctica lo que vamos a hacer es alterar la tabla de people, entonces vamos el panel del lado izquierdo en Tables
+seleccionamos la tabla con el click derecho y le damos alter table y nos lleva al grafico donde podemos modificar las tablas
+y cuando hacemos los cambios por ejemplo de agregar una columna nos arroja esto
+ALTER TABLE `platziblog`.`people` 
+ADD COLUMN `date_of_birth` DATETIME NULL AFTER `city`;
+
+y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo en el panel del lado izquierdo
 
 ***Clase 21 DDL drop***
 
