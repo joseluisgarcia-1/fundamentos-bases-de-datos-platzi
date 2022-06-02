@@ -794,6 +794,11 @@ PRIMARY KEY(persona_id)
 - Para eliminar la tabla es así:
     DROP TABLE people;
 
+PostsgreSQL:
+    Usa casi la misma estructura de MySQL
+
+    \dt: podemos ver la tabla que tenemos en la base de datos
+    
 
 ***Clase 24 Creando Platziblog: tablas independientes***
 
