@@ -798,15 +798,74 @@ PostsgreSQL:
     Usa casi la misma estructura de MySQL
 
     \dt: podemos ver la tabla que tenemos en la base de datos
-    
+
 
 ***Clase 24 Creando Platziblog: tablas independientes***
 
+Una buena práctica es comenzar creando las entidades que no tienen una llave foránea.
+Generalmente en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.
+
+lo gráficos de esta clase los hice en cuaderno
+
+Empezamos en esta clase por crear la base de datos y luego crear las tablas, voy a poner el paso a paso tanto como lo hice con código como desde el gráfico
+
+- Con código:
+
+    CREATE DATABASE platziblog;
+    USE platziblog;
+    CREATE TABLE categorias(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        nombre_categoria varchar(30) NOT NULL
+    )
+
+    CREATE TABLE etiquetas(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        nombre_etiqueta varchar(30) NOT NULL
+    )
+
+    CREATE DATABASE platzi;
+    USE platziblog;
+    CREATE TABLE usuarios(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        login VARCHAR(30) NOT NULL,
+        password VARCHAR(32) NOT NULL,
+        nickname VARCHAR(40) NOT NULL,
+        email VARCHAR(40) NOT NULL UNIQUE
+    );
+
+- Desde el gráfico de MySQL:
+    Cuando hago los pasos de ir al menú del lado izquierdo y todo eso, me arroja el siguiente comando
+
+    CREATE TABLE `platzi`.`categorias` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nombre_categoria` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`id`));
+
+    CREATE TABLE `platzi`.`etiquetas` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nombre_etiqueta` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`id`));
+
+    CREATE TABLE `platzi`.`usuarios` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `login` VARCHAR(30) NOT NULL,
+    `password` VARCHAR(32) NOT NULL,
+    `nickname` VARCHAR(40) NOT NULL,
+    `email` VARCHAR(40) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 
 
 ***Clase 25 Creando Platziblog: tablas dependientes***
 
+Tener cuidado con estas tablas porque tienen llaves foraneas en el ejemplo que estamos mirando es la relación que tiene
+    Posts con usuarios_id y categorias_id
+    Comentarios con usuarios_id y posts_id
 
+    y se crean así
+
+El comando “cascade” sirve para que cada que se haga un update en la tabla principal, 
+se refleje también en la tabla en la que estamos creando la relación.
 
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
