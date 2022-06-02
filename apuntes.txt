@@ -575,6 +575,12 @@ SELECT * FROM platziblog.people;
 
 y con eso queda la tabla en la tabla vistas con la información
 
+- Para crear una vista con código es así:
+
+USE test_db;
+CREATE OR REPLACE VIEW people_platzi AS
+SELECT * FROM test_db.people;
+
 En las vistas se puede guardar información de varias tablas y obtener la información exacta, y tiene la gran ventaja
 de que estas vistas se mantienen en memoria de tal manera que podemos mantener esta vista al día
 
@@ -602,7 +608,79 @@ y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo e
 
 ***Clase 21 DDL drop***
 
+IMPORTANTE:
+así creé una base de datos y tablas con código y en el archvio de Query1, que hice fue:
+1. Crear la base de datos
+2. Decirle a MySQL que use la base de datos creada
+3. como ya estoy usando la base de datos creada, entonces le paso que cree la tabla
+tener en cuenta como se creó la primary key, hasta este momento no sé si esté bien pero así lo hice a modo de ejemplo
+y espero ir puliendo
 
+CREATE DATABASE test_db;
+USE test_db;
+CREATE TABLE people3(
+personas_id INT primary key not null AUTO_INCREMENT,
+last_name varchar(100) not null,
+first_name varchar(100) not null,
+address varchar(100) not null,
+city varchar(100) not null
+);
+
+ASÍ TAMBIÉN FUNCIONÓ
+
+CREATE DATABASE new;
+USE new;
+CREATE TABLE people(
+persona_id INT NOT NULL AUTO_INCREMENT,
+last_name VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+address VARCHAR(100) NOT NULL,
+city VARCHAR(100) NOT NULL,
+PRIMARY KEY(persona_id)
+);
+
+para colocarle la primary key
+
+DDL(Definition Data Language) Lenguaje de definición de datos
+
+Para eliminar una tabla o base de datos lo podemos hacer con el siguiente comando:
+
+Para eliminar una tabla
+    DROP TABLE people;
+
+Para eliminar una base de datos o en ocasiones la base de datos se conoce como esquema(schema)
+    cualquiera de los dos sirve
+    DROP SCHEMA test_db;
+    DROP DATABASE test_db;
+
+En consola lo hacemos así:
+
+desde la app grafica MySQL workbench, podemos ir al menú del lado izquierdo en Tables mirar las tablas que tenemos
+la que vamos a borrar la seleccionamos con click derecho y le damos en la opción drop table y con eso la podemos borrar
+aunque luego de ejecutar ello, nos arroja un código y es así:
+DROP TABLE `test_db`.`people2`;
+y si lo queremos hacer directamente con código lo hacemos así:
+    DROP TABLE people;
+    ó también me funcionó así:
+    DROP TABLE test_db.people
+    en donde le pasé directamente el nombre exacto de la base de datos y de la tabla y funcionó
+
+desde la app grafica MySQL workbench, podemos ir al menú del lado izquierdo mirar los schemas o bases de datos que tenemos
+la que vamos a borrar la seleccionamos con click derecho y le damos en la opción drop schema y con eso la podemos borrar
+aunque luego de ejecutar ello, nos arroja un código y es así:
+DROP DATABASE `tuto`;
+
+y si lo queremos hacer directamente con código lo hacemos así:
+    DROP DATABASE test_db;
+
+- Para crear una vista con código es así:
+
+USE test_db;
+CREATE OR REPLACE VIEW people_platzi AS
+SELECT * FROM test_db.people;
+
+Está puede ser la sentencia ¡más peligrosa! (????), sobre todo cuando somos principiantes. 
+Básicamente borra o desaparece de nuestra base de datos algún elemento.
 
 ***Clase 22 DML***
 
@@ -763,3 +841,14 @@ apuntes:
 
 Claro que si, mira, como el editor me pide una URL yo subo la imagen en https://imgur.com/ y la página me da la URL de la imagen
 que es la que coloco en el editor. Mucha suerte, amigo.
+
+IMPORTANTE:
+
+Para cuando no quiero arrancar el MySQL Workbench que me sale un error de este tipo:
+"mysql workbench could not acquire management access for administration"
+voy en mi pc a: 
+1. Servicios
+2. Busco el servicio que tiene como nombre MySQL80
+3. Si ese servicio no está en ejecución, con click derecho miro las opciones y le doy en Iniciar, y con eso corre el MySQL
+4. En este enlace lo miré
+    https://www.youtube.com/watch?v=gwNdzZ_Enok
