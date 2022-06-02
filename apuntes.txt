@@ -684,7 +684,79 @@ Básicamente borra o desaparece de nuestra base de datos algún elemento.
 
 ***Clase 22 DML***
 
+Data Maniupulation Language(DML) Lenguaje de manipulación de datos
 
+sus pilares son:
+    - Insert
+    - Update
+    - Delete
+    - Select
+Con estos podemos trabajar con la información que contiene una base de datos
+    ejemplos de cada pilar:
+        - Insert:
+            Con este podemos insertar, agregar, adicionar nuevos datos, registro o tupla a nuestra tabla en la base de datos
+                ejemplo de estructura:
+                    INSERT INTO people (last_name, first_name, address, city)
+                    VALUES ('Ronaldo', 'El Fenomeno', 'Leyenda', 'Valladolid');
+        
+        - Update:
+            Actualiza o modifica los datos que ya tenemos:
+            Si ya hay un dato que existe lo actualiza, tener en cuenta que este no inserta datos si no existen, actualiza los que están
+            Ejemplo de estructura:
+                En este le voy a decir que: en la tabla people cambie(SET) el apellido(last_name) por 'Juanfer', la ciudad(City) por 'Buenos Aires'
+                en el campo que el persona_id sea igual a 1
+                UPDATE people
+                SET last_name = 'Juanfer', 'city' = 'Buenos Aires'
+                WHERE persona_id = 1;
+
+            Otro ejemplo:                
+                En este le voy a decir que: en la tabla people cambie(SET) el primer nombre(first_name) por 'Robert'
+                donde la ciudad sea igual a 'Manchester'
+                UPDATE people
+                SET firts_name = 'Robert'
+                WHERE city = 'Manchester'
+                Tener cuidado con este porque si tengo muchos usuarios con que su ciudad es Manchester le puede cambiar el dato a todos los usuarios
+            
+        - Delete:
+            Sirve para borrar contenido de una tabla o una tabla también
+            Ejemplo de estructura:
+                Para borrar un dato nada más es así:
+                    DELETE FROM people
+                    WHERE persona_id = 1;
+                    Si me funcionó, pero si intentaba borrar con otro atributo, si no me dejaba, averiguar por qué
+                Para borrar la tabla completa es así:
+                    DELETE FROM people
+        - Select:
+            Se usa mucho esta sentencia, lo que hace es traer información de la base de datos
+            Ejemplo de estructura:
+                En este ejemplo le estamos diciendo que nos traiga el nombre y apellido de la tabla people
+                SELECT first_name, last_name FROM people;
+
+
+DDL -> Data Definition Language
+Ayuda a crear la estructura de una BD.
+
+Create
+* Database
+* Table
+* View
+Alter
+Drop
+DML -> Data Manipulation Language
+Ayuda a la manipulacion del contenido
+
+Insert
+Update
+Delete
+Select
+Siempre tener cuidado en el orden de los campos donde se le va pasar la información, porque si no, se agrega información en campos que no son
+
+DML trata del contenido de la base de datos. Son las siglas de Data Manipulation Language y sus comandos son:
+
+Insert: Inserta o agrega nuevos registros a la tabla.
+Update: Actualiza o modifica los datos que ya existen.
+Delete: Esta sentencia es riesgosa porque puede borrar el contenido de una tabla.
+Select: Trae información de la base de datos.
 
 ***Clase 23 ¿Qué tan standard es SQL?***
 
