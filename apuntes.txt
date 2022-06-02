@@ -760,6 +760,39 @@ Select: Trae información de la base de datos.
 
 ***Clase 23 ¿Qué tan standard es SQL?***
 
+La utilidad más grande de SQL fue unificar la forma en la que pensamos y hacemos preguntas a un repositorio de datos. 
+Ahora que nacen nuevas bases de datos igualmente siguen tomando elementos de SQL.
+Para crear una tabla es así:
+    CREATE TABLE people3(
+    personas_id INT primary key not null AUTO_INCREMENT,
+    last_name varchar(100) not null,
+    first_name varchar(100) not null,
+    address varchar(100) not null,
+    city varchar(100) not null
+    );
+
+ASÍ TAMBIÉN FUNCIONÓ, pero si queremos especificar en qué base de datos queremos crear esa tabla, es así:
+
+USE new;
+CREATE TABLE people(
+persona_id INT NOT NULL AUTO_INCREMENT,
+last_name VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+address VARCHAR(100) NOT NULL,
+city VARCHAR(100) NOT NULL,
+PRIMARY KEY(persona_id)
+);
+
+
+- Para insertar datos es así:
+    INSERT INTO people (last_name, first_name, address, city)
+    VALUES ('Ronaldo', 'El Fenomeno', 'Leyenda', 'Valladolid');
+
+- Para traer o ver información hacemos así:
+    SELECT firts_name, last_name FROM people;
+
+- Para eliminar la tabla es así:
+    DROP TABLE people;
 
 
 ***Clase 24 Creando Platziblog: tablas independientes***
