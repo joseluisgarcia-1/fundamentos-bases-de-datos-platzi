@@ -608,7 +608,6 @@ y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo e
 
 ***Clase 21 DDL drop***
 
-<<<<<<< HEAD
 Lenguaje de definición de datos(Definition Data Language)
 
 Drop: Para borrar
@@ -629,7 +628,6 @@ escoger la opción drop schema
 
 en código sería algo así por ejemplo:
     DROP DATABASE `platziblog`;
-=======
 IMPORTANTE:
 así creé una base de datos y tablas con código y en el archvio de Query1, que hice fue:
 1. Crear la base de datos
@@ -649,7 +647,6 @@ city varchar(100) not null
 );
 
 ASÍ TAMBIÉN FUNCIONÓ
->>>>>>> 8fe50d3c3ec3291dcd587941530d752da5c52f7e
 
 CREATE DATABASE new;
 USE new;
@@ -907,7 +904,87 @@ se refleje también en la tabla en la que estamos creando la relación.
 
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
+Creación de todas las tablas por medio de código con llaves foraneas
 
+create database platziblog;
+use platziblog;
+
+CREATE TABLE categorias (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_categorias VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE etiquetas (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_etiquetas VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE usuarios (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+login VARCHAR(32) NOT NULL,
+password VARCHAR(30) NOT NULL,
+nickname VARCHAR(40) NOT NULL,
+email CHAR(8) NOT NULL UNIQUE DEFAULT 'activo'
+);
+
+CREATE TABLE posts (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(150) NOT NULL,
+fecha_publicacion TIMESTAMP NOT NULL,
+contenido TEXT NOT NULL,
+status CHAR(8) NOT NULL DEFAULT 'activo',
+usuario_id INT NOT NULL,
+categoria_id INT NOT NULL,
+INDEX posts_categorias_idx (categoria_id ASC),
+INDEX posts_usuarios_idx (usuario_id ASC),
+CONSTRAINT posts_usuarios
+FOREIGN KEY(usuario_id) 
+REFERENCES platziblog.usuarios(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT posts_categorias
+FOREIGN KEY(categoria_id)
+REFERENCES platziblog.categorias(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+use platziblog;
+CREATE TABLE comentarios (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+cuerpo_comentario TEXT NOT NULL,
+usuarios_id INT NOT NULL,
+posts_id INT NOT NULL,
+INDEX comentarios_usuarios_idx (usuarios_id ASC),
+INDEX comentarios_posts_idx (posts_id ASC),
+CONSTRAINT comentarios_usuarios
+FOREIGN KEY(usuarios_id) 
+REFERENCES platziblog.usuarios(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT comentarios_posts
+FOREIGN KEY(posts_id)
+REFERENCES platziblog.posts(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+
+CREATE TABLE posts_etiquetas (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+posts_id INT NOT NULL,
+etiquetas_id INT NOT NULL,
+INDEX postsetiquetas_etiquetas_idx (etiquetas_id ASC),
+INDEX postsetiquetas_posts_idx (posts_id ASC),
+CONSTRAINT postsetiquetas_etiquetas
+FOREIGN KEY(etiquetas_id) 
+REFERENCES platziblog.etiquetas(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT postsetiquetas_posts
+FOREIGN KEY(posts_id)
+REFERENCES platziblog.posts(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
 
 Consultas a una base de datos
 
@@ -1059,3 +1136,71 @@ voy en mi pc a:
 3. Si ese servicio no está en ejecución, con click derecho miro las opciones y le doy en Iniciar, y con eso corre el MySQL
 4. En este enlace lo miré
     https://www.youtube.com/watch?v=gwNdzZ_Enok
+
+
+CREATE TABLE `pltazi`.`posts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(45) NOT NULL,
+  `fecha_publicacion` TIMESTAMP NOT NULL,
+  `contenido` TEXT NOT NULL,
+  `status` CHAR(8) NOT NULL DEFAULT 'acitvo',
+  `usuario_id` INT NOT NULL,
+  `categoria_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `posts_usuarios_idx` (`usuario_id` ASC),
+  INDEX `posts_categorias_idx` (`categoria_id` ASC),
+  CONSTRAINT `posts_usuarios`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `pltazi`.`usuarios` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `posts_categorias`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `pltazi`.`categorias` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE);
+
+Prueba de creación de tabla con Foreign key
+
+use platziblog;
+CREATE TABLE posts (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(150) NOT NULL,
+fecha_publicacion TIMESTAMP NOT NULL,
+contenido TEXT NOT NULL,
+status CHAR(8) NOT NULL DEFAULT 'activo',
+usuario_id INT NOT NULL,
+categoria_id INT NOT NULL,
+INDEX posts_categorias_idx (categoria_id ASC),
+INDEX posts_usuarios_idx (usuario_id ASC),
+CONSTRAINT posts_usuarios
+FOREIGN KEY(usuario_id) 
+REFERENCES platziblog.usuarios(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT posts_categorias
+FOREIGN KEY(categoria_id)
+REFERENCES platziblog.categorias(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+
+
+CREATE TABLE `platziblog`.`comentarios` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `cuerpo_comentario` TEXT NOT NULL,
+  `usuarios_id` INT NOT NULL,
+  `posts_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `comentarios_usuarios_idx` (`usuarios_id` ASC),
+  INDEX `comentarios_posts_idx` (`posts_id` ASC),
+  CONSTRAINT `comentarios_usuarios`
+    FOREIGN KEY (`usuarios_id`)
+    REFERENCES `platziblog`.`usuarios` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `comentarios_posts`
+    FOREIGN KEY (`posts_id`)
+    REFERENCES `platziblog`.`posts` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
