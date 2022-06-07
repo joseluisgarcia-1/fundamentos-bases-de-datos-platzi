@@ -575,6 +575,12 @@ SELECT * FROM platziblog.people;
 
 y con eso queda la tabla en la tabla vistas con la información
 
+- Para crear una vista con código es así:
+
+USE test_db;
+CREATE OR REPLACE VIEW people_platzi AS
+SELECT * FROM test_db.people;
+
 En las vistas se puede guardar información de varias tablas y obtener la información exacta, y tiene la gran ventaja
 de que estas vistas se mantienen en memoria de tal manera que podemos mantener esta vista al día
 
@@ -602,6 +608,7 @@ y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo e
 
 ***Clase 21 DDL drop***
 
+<<<<<<< HEAD
 Lenguaje de definición de datos(Definition Data Language)
 
 Drop: Para borrar
@@ -622,22 +629,281 @@ escoger la opción drop schema
 
 en código sería algo así por ejemplo:
     DROP DATABASE `platziblog`;
+=======
+IMPORTANTE:
+así creé una base de datos y tablas con código y en el archvio de Query1, que hice fue:
+1. Crear la base de datos
+2. Decirle a MySQL que use la base de datos creada
+3. como ya estoy usando la base de datos creada, entonces le paso que cree la tabla
+tener en cuenta como se creó la primary key, hasta este momento no sé si esté bien pero así lo hice a modo de ejemplo
+y espero ir puliendo
+
+CREATE DATABASE test_db;
+USE test_db;
+CREATE TABLE people3(
+personas_id INT primary key not null AUTO_INCREMENT,
+last_name varchar(100) not null,
+first_name varchar(100) not null,
+address varchar(100) not null,
+city varchar(100) not null
+);
+
+ASÍ TAMBIÉN FUNCIONÓ
+>>>>>>> 8fe50d3c3ec3291dcd587941530d752da5c52f7e
+
+CREATE DATABASE new;
+USE new;
+CREATE TABLE people(
+persona_id INT NOT NULL AUTO_INCREMENT,
+last_name VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+address VARCHAR(100) NOT NULL,
+city VARCHAR(100) NOT NULL,
+PRIMARY KEY(persona_id)
+);
+
+para colocarle la primary key
+
+DDL(Definition Data Language) Lenguaje de definición de datos
+
+Para eliminar una tabla o base de datos lo podemos hacer con el siguiente comando:
+
+Para eliminar una tabla
+    DROP TABLE people;
+
+Para eliminar una base de datos o en ocasiones la base de datos se conoce como esquema(schema)
+    cualquiera de los dos sirve
+    DROP SCHEMA test_db;
+    DROP DATABASE test_db;
+
+En consola lo hacemos así:
+
+desde la app grafica MySQL workbench, podemos ir al menú del lado izquierdo en Tables mirar las tablas que tenemos
+la que vamos a borrar la seleccionamos con click derecho y le damos en la opción drop table y con eso la podemos borrar
+aunque luego de ejecutar ello, nos arroja un código y es así:
+DROP TABLE `test_db`.`people2`;
+y si lo queremos hacer directamente con código lo hacemos así:
+    DROP TABLE people;
+    ó también me funcionó así:
+    DROP TABLE test_db.people
+    en donde le pasé directamente el nombre exacto de la base de datos y de la tabla y funcionó
+
+desde la app grafica MySQL workbench, podemos ir al menú del lado izquierdo mirar los schemas o bases de datos que tenemos
+la que vamos a borrar la seleccionamos con click derecho y le damos en la opción drop schema y con eso la podemos borrar
+aunque luego de ejecutar ello, nos arroja un código y es así:
+DROP DATABASE `tuto`;
+
+y si lo queremos hacer directamente con código lo hacemos así:
+    DROP DATABASE test_db;
+
+- Para crear una vista con código es así:
+
+USE test_db;
+CREATE OR REPLACE VIEW people_platzi AS
+SELECT * FROM test_db.people;
+
+Está puede ser la sentencia ¡más peligrosa! (????), sobre todo cuando somos principiantes. 
+Básicamente borra o desaparece de nuestra base de datos algún elemento.
 
 ***Clase 22 DML***
 
+Data Maniupulation Language(DML) Lenguaje de manipulación de datos
 
+sus pilares son:
+    - Insert
+    - Update
+    - Delete
+    - Select
+Con estos podemos trabajar con la información que contiene una base de datos
+    ejemplos de cada pilar:
+        - Insert:
+            Con este podemos insertar, agregar, adicionar nuevos datos, registro o tupla a nuestra tabla en la base de datos
+                ejemplo de estructura:
+                    INSERT INTO people (last_name, first_name, address, city)
+                    VALUES ('Ronaldo', 'El Fenomeno', 'Leyenda', 'Valladolid');
+        
+        - Update:
+            Actualiza o modifica los datos que ya tenemos:
+            Si ya hay un dato que existe lo actualiza, tener en cuenta que este no inserta datos si no existen, actualiza los que están
+            Ejemplo de estructura:
+                En este le voy a decir que: en la tabla people cambie(SET) el apellido(last_name) por 'Juanfer', la ciudad(City) por 'Buenos Aires'
+                en el campo que el persona_id sea igual a 1
+                UPDATE people
+                SET last_name = 'Juanfer', 'city' = 'Buenos Aires'
+                WHERE persona_id = 1;
+
+            Otro ejemplo:                
+                En este le voy a decir que: en la tabla people cambie(SET) el primer nombre(first_name) por 'Robert'
+                donde la ciudad sea igual a 'Manchester'
+                UPDATE people
+                SET firts_name = 'Robert'
+                WHERE city = 'Manchester'
+                Tener cuidado con este porque si tengo muchos usuarios con que su ciudad es Manchester le puede cambiar el dato a todos los usuarios
+            
+        - Delete:
+            Sirve para borrar contenido de una tabla o una tabla también
+            Ejemplo de estructura:
+                Para borrar un dato nada más es así:
+                    DELETE FROM people
+                    WHERE persona_id = 1;
+                    Si me funcionó, pero si intentaba borrar con otro atributo, si no me dejaba, averiguar por qué
+                Para borrar la tabla completa es así:
+                    DELETE FROM people
+        - Select:
+            Se usa mucho esta sentencia, lo que hace es traer información de la base de datos
+            Ejemplo de estructura:
+                En este ejemplo le estamos diciendo que nos traiga el nombre y apellido de la tabla people
+                SELECT first_name, last_name FROM people;
+
+
+DDL -> Data Definition Language
+Ayuda a crear la estructura de una BD.
+
+Create
+* Database
+* Table
+* View
+Alter
+Drop
+DML -> Data Manipulation Language
+Ayuda a la manipulacion del contenido
+
+Insert
+Update
+Delete
+Select
+Siempre tener cuidado en el orden de los campos donde se le va pasar la información, porque si no, se agrega información en campos que no son
+
+DML trata del contenido de la base de datos. Son las siglas de Data Manipulation Language y sus comandos son:
+
+Insert: Inserta o agrega nuevos registros a la tabla.
+Update: Actualiza o modifica los datos que ya existen.
+Delete: Esta sentencia es riesgosa porque puede borrar el contenido de una tabla.
+Select: Trae información de la base de datos.
 
 ***Clase 23 ¿Qué tan standard es SQL?***
 
+La utilidad más grande de SQL fue unificar la forma en la que pensamos y hacemos preguntas a un repositorio de datos. 
+Ahora que nacen nuevas bases de datos igualmente siguen tomando elementos de SQL.
+Para crear una tabla es así:
+    CREATE TABLE people3(
+    personas_id INT primary key not null AUTO_INCREMENT,
+    last_name varchar(100) not null,
+    first_name varchar(100) not null,
+    address varchar(100) not null,
+    city varchar(100) not null
+    );
+
+ASÍ TAMBIÉN FUNCIONÓ, pero si queremos especificar en qué base de datos queremos crear esa tabla, es así:
+
+USE new;
+CREATE TABLE people(
+persona_id INT NOT NULL AUTO_INCREMENT,
+last_name VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+address VARCHAR(100) NOT NULL,
+city VARCHAR(100) NOT NULL,
+PRIMARY KEY(persona_id)
+);
+
+
+- Para insertar datos es así:
+    INSERT INTO people (last_name, first_name, address, city)
+    VALUES ('Ronaldo', 'El Fenomeno', 'Leyenda', 'Valladolid');
+
+- Para traer o ver información hacemos así:
+    SELECT firts_name, last_name FROM people;
+
+- Para eliminar la tabla es así:
+    DROP TABLE people;
+
+PostsgreSQL:
+    Usa casi la misma estructura de MySQL
+
+    \dt: podemos ver la tabla que tenemos en la base de datos
 
 
 ***Clase 24 Creando Platziblog: tablas independientes***
 
+Una buena práctica es comenzar creando las entidades que no tienen una llave foránea.
+Generalmente en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.
+
+lo gráficos de esta clase los hice en cuaderno
+
+Empezamos en esta clase por crear la base de datos y luego crear las tablas, voy a poner el paso a paso tanto como lo hice con código como desde el gráfico
+
+- Con código:
+
+    CREATE DATABASE platziblog;
+    USE platziblog;
+    CREATE TABLE categorias(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        nombre_categoria varchar(30) NOT NULL
+    )
+
+    CREATE TABLE etiquetas(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        nombre_etiqueta varchar(30) NOT NULL
+    )
+
+    CREATE DATABASE platzi;
+    USE platziblog;
+    CREATE TABLE usuarios(
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        login VARCHAR(30) NOT NULL,
+        password VARCHAR(32) NOT NULL,
+        nickname VARCHAR(40) NOT NULL,
+        email VARCHAR(40) NOT NULL UNIQUE
+    );
+
+- Desde el gráfico de MySQL:
+    Cuando hago los pasos de ir al menú del lado izquierdo y todo eso, me arroja el siguiente comando
+
+    CREATE TABLE `platzi`.`categorias` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nombre_categoria` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`id`));
+
+    CREATE TABLE `platzi`.`etiquetas` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nombre_etiqueta` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`id`));
+
+    CREATE TABLE `platzi`.`usuarios` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `login` VARCHAR(30) NOT NULL,
+    `password` VARCHAR(32) NOT NULL,
+    `nickname` VARCHAR(40) NOT NULL,
+    `email` VARCHAR(40) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 
 
 ***Clase 25 Creando Platziblog: tablas dependientes***
 
+Tener cuidado con estas tablas porque tienen llaves foraneas en el ejemplo que estamos mirando es la relación que tiene
+    Posts con usuarios_id y categorias_id
+    Comentarios con usuarios_id y posts_id
 
+    y se crean así
+
+    no sé si está bien(aunque eso espero), pero mediante código lo hice así:
+
+    CREATE TABLE posts (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        titulo VARCHAR(150) NOT NULL,
+        fecha_publicacion TIMESTAMP,
+        contenido TEXT NOT NULL,
+        estado CHAR(8) DEFAULT('activo'),
+        FOREIGN KEY(id) REFERENCES usuarios(id),
+        FOREIGN KEY(id) REFERENCES categorias(id)
+        ON DELETE NO ACTION
+        ON UPDATE CASCADE
+        );
+
+
+El comando “cascade” sirve para que cada que se haga un update en la tabla principal, 
+se refleje también en la tabla en la que estamos creando la relación.
 
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
@@ -782,3 +1048,14 @@ apuntes:
 
 Claro que si, mira, como el editor me pide una URL yo subo la imagen en https://imgur.com/ y la página me da la URL de la imagen
 que es la que coloco en el editor. Mucha suerte, amigo.
+
+IMPORTANTE:
+
+Para cuando no quiero arrancar el MySQL Workbench que me sale un error de este tipo:
+"mysql workbench could not acquire management access for administration"
+voy en mi pc a: 
+1. Servicios
+2. Busco el servicio que tiene como nombre MySQL80
+3. Si ese servicio no está en ejecución, con click derecho miro las opciones y le doy en Iniciar, y con eso corre el MySQL
+4. En este enlace lo miré
+    https://www.youtube.com/watch?v=gwNdzZ_Enok
