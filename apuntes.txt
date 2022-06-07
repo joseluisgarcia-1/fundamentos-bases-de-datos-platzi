@@ -990,15 +990,46 @@ Consultas a una base de datos
 
 ***Clase 27 ¿Por qué las consultas son tan importantes?***
 
-
+Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
+Alrededor de las consultas a las bases de datos se han creado varias especialidades como ETL o transformación de datos, 
+business intelligence e incluso machine learning.
 
 ***Clase 28 Estructura básica de un Query***
 
+Los queries son la forma en la que estructuramos las preguntas que se harán a la base de datos. 
+Transforma preguntas en sintaxis.
 
+El query tiene básicamente 2 partes: SELECT y FROM y puede aparecer una tercera como WHERE.
+
+La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filtrar campos.
+
+inserté estos datos para probar 
+
+INSERT INTO categorias (id, nombre_categorias)
+VALUES ('1', '1');
+
+INSERT INTO posts (id, titulo, fecha_publicacion, contenido, status, usuario_id, categoria_id)
+VALUES ('1', 'Mi primer post', '2021-03-04', 'hola amiguitos', 'activo', '1', '1');
+
+INSERT INTO usuarios (id, login, password, nickname, email)
+VALUES ('1', 'user1', 'userdos', 'userone', 'll@f.com');
+
+ejemplo de consulta sencilla:
+
+    SELECT * FROM posts WHERE fecha_publicacion < '2023'
+
+    SELECT * FROM posts WHERE fecha_publicacion < '2022'
 
 ***Clase 29 SELECT***
 
+SELECT se encarga de proyectar o mostrar datos.
 
+El nombre de las columnas o campos que estamos consultando puede ser cambiado utilizando AS después del nombre del campo y poniendo el nuevo que queremos tener:
+SELECT titulo AS encabezado
+FROM posts;
+Existe una función de SELECT para poder contar la cantidad de registros. Esa información (un número) será el resultado del query:
+SELECT COUNT(*)
+FROM posts;
 
 ***Clase 30 FROM***
 
