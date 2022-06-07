@@ -602,7 +602,26 @@ y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo e
 
 ***Clase 21 DDL drop***
 
+Lenguaje de definición de datos(Definition Data Language)
 
+Drop: Para borrar
+    ejemplos:
+        Para borrar una tabla
+            DROP people;
+        Para borrar una base de datos
+            DROP DATABASE test_db
+
+También para borrar una tabla desde el gráfico podemos ir al menú del lado izquierdo y seleccionar la tabla con click derecho y
+escoger la opción drop delete
+
+en código sería algo así por ejemplo:
+    DROP TABLE ´platzi_blog´.´people´;
+
+También para borrar un schema desde el gráfico podemos ir al menú del lado izquierdo y seleccionar el schema con click derecho y
+escoger la opción drop schema
+
+en código sería algo así por ejemplo:
+    DROP DATABASE `platziblog`;
 
 ***Clase 22 DML***
 
