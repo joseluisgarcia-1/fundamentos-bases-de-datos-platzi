@@ -882,11 +882,154 @@ Tener cuidado con estas tablas porque tienen llaves foraneas en el ejemplo que e
 El comando “cascade” sirve para que cada que se haga un update en la tabla principal, 
 se refleje también en la tabla en la que estamos creando la relación.
 
+Consultas a una base de datos
+
+Colores de los atributos en la base de datos:
+    - Blanco: Cuando estaba sin marcar el NOT NULL
+    - Azul celeste: Cuando le marqué el NOT NULL
+    - La llave si quiere decir que es un id
+
+Creé la base de datos desde el gráfico y tener en cuenta que me arrojó este código
+
+    CREATE TABLE `platzi`.`posts` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `titulo` VARCHAR(150) NULL,
+    `fecha_publicacion` TIMESTAMP NULL,
+    `contenido` TEXT NOT NULL,
+    `status` CHAR(8) NOT NULL DEFAULT 'activo',
+    `usuario_id` INT NOT NULL,
+    `categoria_id` INT NOT NULL,
+    PRIMARY KEY (`id`));
+
+En la parte de abajo del gráfico de Workbench hay una opción para agregar una Foreign Key
+
+Las opciones que tienen estas llaves ON UPDATE:
+    - CASCADE: Cada que se haga un update en esa otra tabla hágalo también en la tabla de acá
+    - NO ACTION: No haga nada si se borra esa llave, borre los datos y ya
+    - SET NULL: lo que hace es que cuando el usuario desaparezca en el lugar del usuario_id me va poner un NULL
+    - RESTRICT: Lo que quiere decir es que cada que quieran borrar un usuario que tenga un blog posts asociado  va decir, No, no puedes
+        borrar ese usuario hasta que no se borren sus blog posts y te asegures que no hay información
+
+También está la relación que dice qué va pasar cuando se borre el usuario ON DELETE:
+    - CASCADE: si borran el usuario se borran todos los posts que haya creado un usuario
+    - SET NULL: lo que hace es que cuando el usuario desaparezca en el lugar del usuario_id me va poner un NULL
+    - RESTRICT: Lo que quiere decir es que cada que quieran borrar un usuario que tenga un blog posts asociado  va decir, No, no puedes
+        borrar ese usuario hasta que no se borren sus blog posts y te asegures que no hay información
+    - NO ACTION: No haga nada si se borra esa llave, borre los datos y ya
+
+la creación de la Foreign Key para la tabla platzi.posts y platzi.categorias
+
+ALTER TABLE `platzi`.`posts` 
+ADD INDEX `posts_usuarios_idx` (`usuario_id` ASC) VISIBLE;
+;
+ALTER TABLE `platzi`.`posts` 
+ADD CONSTRAINT `posts_usuarios`
+  FOREIGN KEY (`usuario_id`)
+  REFERENCES `platzi`.`usuarios` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE CASCADE;
+
+ALTER TABLE `platzi`.`posts` 
+ADD INDEX `posts_categorias_idx` (`categoria_id` ASC) VISIBLE;
+;
+ALTER TABLE `platzi`.`posts` 
+ADD CONSTRAINT `posts_categorias`
+  FOREIGN KEY (`categoria_id`)
+  REFERENCES `platzi`.`categorias` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
+El comando “cascade” sirve para que cada que se haga un update en la tabla principal,
+se refleje también en la tabla en la que estamos creando la relación.
 
+Las Foreing Key options son las siguientes:
 
-Consultas a una base de datos
+On update: 
+
+Significa qué pasará con las relaciones cuando una de estas sea modificada en sus campos relacionados, Por ejemplo, pueden utilizarse los valores:
+    - cascade: Si el id de un usuario pasa de 11 a 12, entonces la relacion se actualizará y el post buscará el id nuevo en lugar de quedarse sin usuario.
+    - restrict: _Si el id de un usuario pasa de 11 a 12, no lo permitirá hasta que no sean actualizados antes todos los post relacionados.
+    - set null Si el id de un usuario pasa de 11 a 12, entonces los post solo no estará relacionados con nada.
+    - no action: Si el id de un usuario pasa de 11 a 12, no se hará nada. Solo se romperá la relación.
+
+On delete:
+    - cascade: Si un usuario es eliminado entonces se borrarán todos los post relacionados.
+    - restrict: No se podrá eliminar un usuario hasta que sean eliminados todos su post relacionados.
+    - set null: Si un usuario es eliminado, entonces los post solo no estará relacionados con nada.
+    - no action: Si un usuario es eliminado, no se hará nada. Solo se romperá la relación.
+
+Las tablas transitivas sirven como puente para unir dos tablas. No tienen contenido semántico.
+Reverse Engineer nos reproduce el esquema del cual nos basamos para crear nuestras tablas. 
+Es útil cuando llegas a un nuevo trabajo y quieres entender cuál fue la mentalidad que tuvieron al momento de crear las bases de datos.
+
+Creé la base de datos comentarios con código y lo hice así:
+    USE platziblog;
+    CREATE TABLE comentarios (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    cuerpo_comentario TEXT NOT NULL,
+    usuario_id INT NOT NULL,
+    post_id INT NOT NULL,
+    FOREIGN KEY(id) REFERENCES usuarios(id),
+    FOREIGN KEY(id) REFERENCES categorias(id)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE
+    );
+
+Creé la base de datos mediante el gráfico, con llaves foraneas y todo y me arrojó el siguiente código
+
+CREATE TABLE `platzi`.`comentarios` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `cuerpo_comentario` TEXT NOT NULL,
+  `usuario_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `comentarios_usuarios_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `comentarios_posts_idx` (`post_id` ASC) VISIBLE,
+  CONSTRAINT `comentarios_usuarios`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `platzi`.`usuarios` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `comentarios_posts`
+    FOREIGN KEY (`post_id`)
+    REFERENCES `platzi`.`posts` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+Creé la base de datos transitiva que era posts_etiquetas con código y llaves foraneas y quedó así
+
+    USE platziblog;
+    CREATE TABLE posts_etiquetas (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    posts_id INT NOT NULL,
+    etiquetas_id INT NOT NULL,
+    FOREIGN KEY(id) REFERENCES posts(id),
+    FOREIGN KEY(id) REFERENCES etiquetas(id)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE
+    );
+
+Creé la base de datos mediante el gráfico y me quedó así:
+
+CREATE TABLE `platzi`.`posts_etiquetas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `posts_id` INT NOT NULL,
+  `etiquetas_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `postsetiquetas_posts_idx` (`posts_id` ASC) VISIBLE,
+  INDEX `postsetiquetas_etiquetas_idx` (`etiquetas_id` ASC) VISIBLE,
+  CONSTRAINT `postsetiquetas_posts`
+    FOREIGN KEY (`posts_id`)
+    REFERENCES `platzi`.`posts` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `postsetiquetas_etiquetas`
+    FOREIGN KEY (`etiquetas_id`)
+    REFERENCES `platzi`.`etiquetas` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 ***Clase 27 ¿Por qué las consultas son tan importantes?***
 
