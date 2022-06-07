@@ -608,6 +608,26 @@ y para modificar de nuevo ya sea el tipo de dato u otro dato, hacemos lo mismo e
 
 ***Clase 21 DDL drop***
 
+Lenguaje de definición de datos(Definition Data Language)
+
+Drop: Para borrar
+    ejemplos:
+        Para borrar una tabla
+            DROP people;
+        Para borrar una base de datos
+            DROP DATABASE test_db
+
+También para borrar una tabla desde el gráfico podemos ir al menú del lado izquierdo y seleccionar la tabla con click derecho y
+escoger la opción drop delete
+
+en código sería algo así por ejemplo:
+    DROP TABLE ´platzi_blog´.´people´;
+
+También para borrar un schema desde el gráfico podemos ir al menú del lado izquierdo y seleccionar el schema con click derecho y
+escoger la opción drop schema
+
+en código sería algo así por ejemplo:
+    DROP DATABASE `platziblog`;
 IMPORTANTE:
 así creé una base de datos y tablas con código y en el archvio de Query1, que hice fue:
 1. Crear la base de datos
@@ -941,10 +961,94 @@ ADD CONSTRAINT `posts_categorias`
 
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
+<<<<<<< HEAD
 El comando “cascade” sirve para que cada que se haga un update en la tabla principal,
 se refleje también en la tabla en la que estamos creando la relación.
 
 Las Foreing Key options son las siguientes:
+=======
+Creación de todas las tablas por medio de código con llaves foraneas
+
+create database platziblog;
+use platziblog;
+
+CREATE TABLE categorias (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_categorias VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE etiquetas (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombre_etiquetas VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE usuarios (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+login VARCHAR(32) NOT NULL,
+password VARCHAR(30) NOT NULL,
+nickname VARCHAR(40) NOT NULL,
+email CHAR(8) NOT NULL UNIQUE DEFAULT 'activo'
+);
+
+CREATE TABLE posts (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(150) NOT NULL,
+fecha_publicacion TIMESTAMP NOT NULL,
+contenido TEXT NOT NULL,
+status CHAR(8) NOT NULL DEFAULT 'activo',
+usuario_id INT NOT NULL,
+categoria_id INT NOT NULL,
+INDEX posts_categorias_idx (categoria_id ASC),
+INDEX posts_usuarios_idx (usuario_id ASC),
+CONSTRAINT posts_usuarios
+FOREIGN KEY(usuario_id) 
+REFERENCES platziblog.usuarios(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT posts_categorias
+FOREIGN KEY(categoria_id)
+REFERENCES platziblog.categorias(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+use platziblog;
+CREATE TABLE comentarios (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+cuerpo_comentario TEXT NOT NULL,
+usuarios_id INT NOT NULL,
+posts_id INT NOT NULL,
+INDEX comentarios_usuarios_idx (usuarios_id ASC),
+INDEX comentarios_posts_idx (posts_id ASC),
+CONSTRAINT comentarios_usuarios
+FOREIGN KEY(usuarios_id) 
+REFERENCES platziblog.usuarios(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT comentarios_posts
+FOREIGN KEY(posts_id)
+REFERENCES platziblog.posts(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+
+CREATE TABLE posts_etiquetas (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+posts_id INT NOT NULL,
+etiquetas_id INT NOT NULL,
+INDEX postsetiquetas_etiquetas_idx (etiquetas_id ASC),
+INDEX postsetiquetas_posts_idx (posts_id ASC),
+CONSTRAINT postsetiquetas_etiquetas
+FOREIGN KEY(etiquetas_id) 
+REFERENCES platziblog.etiquetas(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+CONSTRAINT postsetiquetas_posts
+FOREIGN KEY(posts_id)
+REFERENCES platziblog.posts(id)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+);
+>>>>>>> 9141895ba2fb0e2b72ef3f64ab5231a9c63cf29a
 
 On update: 
 
@@ -1033,15 +1137,51 @@ CREATE TABLE `platzi`.`posts_etiquetas` (
 
 ***Clase 27 ¿Por qué las consultas son tan importantes?***
 
-
+Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
+Alrededor de las consultas a las bases de datos se han creado varias especialidades como ETL o transformación de datos, 
+business intelligence e incluso machine learning.
 
 ***Clase 28 Estructura básica de un Query***
 
+Los queries son la forma en la que estructuramos las preguntas que se harán a la base de datos. 
+Transforma preguntas en sintaxis.
 
+El query tiene básicamente 2 partes: SELECT y FROM y puede aparecer una tercera como WHERE.
+
+La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filtrar campos.
+
+inserté estos datos para probar 
+
+INSERT INTO categorias (id, nombre_categorias)
+VALUES ('1', '1');
+
+INSERT INTO posts (id, titulo, fecha_publicacion, contenido, status, usuario_id, categoria_id)
+VALUES ('1', 'Mi primer post', '2021-03-04', 'hola amiguitos', 'activo', '1', '1');
+
+INSERT INTO usuarios (id, login, password, nickname, email)
+VALUES ('1', 'user1', 'userdos', 'userone', 'll@f.com');
+
+ejemplo de consulta sencilla:
+
+    SELECT * FROM posts WHERE fecha_publicacion < '2023'
+
+    SELECT * FROM posts WHERE fecha_publicacion < '2022'
 
 ***Clase 29 SELECT***
 
+SELECT se encarga de proyectar o mostrar datos.
 
+El nombre de las columnas o campos que estamos consultando puede ser cambiado utilizando AS después del nombre del campo y poniendo el nuevo que queremos tener:
+    SELECT titulo AS encabezado FROM posts;
+Existe una función de SELECT para poder contar la cantidad de registros. 
+Esa información (un número) será el resultado del query:
+    SELECT COUNT(*) FROM posts;
+
+ejemplos de consultas de la clase
+
+    - select count(*) from posts;
+    - select count(*) from categorias;
+    - select titulo, status from posts;
 
 ***Clase 30 FROM***
 
