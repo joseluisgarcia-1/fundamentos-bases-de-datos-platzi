@@ -908,6 +908,7 @@ Colores de los atributos en la base de datos:
     - Blanco: Cuando estaba sin marcar el NOT NULL
     - Azul celeste: Cuando le marqué el NOT NULL
     - La llave si quiere decir que es un id
+    - Rojo: es cuando es una llave foranea
 
 Creé la base de datos desde el gráfico y tener en cuenta que me arrojó este código
 
@@ -961,12 +962,10 @@ ADD CONSTRAINT `posts_categorias`
 
 ***Clase 26 Creando Platziblog: tablas transitivas***
 
-<<<<<<< HEAD
 El comando “cascade” sirve para que cada que se haga un update en la tabla principal,
 se refleje también en la tabla en la que estamos creando la relación.
 
 Las Foreing Key options son las siguientes:
-=======
 Creación de todas las tablas por medio de código con llaves foraneas
 
 create database platziblog;
@@ -987,7 +986,7 @@ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 login VARCHAR(32) NOT NULL,
 password VARCHAR(30) NOT NULL,
 nickname VARCHAR(40) NOT NULL,
-email CHAR(8) NOT NULL UNIQUE DEFAULT 'activo'
+email VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE posts (
@@ -1048,7 +1047,6 @@ REFERENCES platziblog.posts(id)
 ON DELETE NO ACTION
 ON UPDATE CASCADE
 );
->>>>>>> 9141895ba2fb0e2b72ef3f64ab5231a9c63cf29a
 
 On update: 
 
@@ -1155,17 +1153,16 @@ inserté estos datos para probar
 INSERT INTO categorias (id, nombre_categorias)
 VALUES ('1', '1');
 
-INSERT INTO posts (id, titulo, fecha_publicacion, contenido, status, usuario_id, categoria_id)
-VALUES ('1', 'Mi primer post', '2021-03-04', 'hola amiguitos', 'activo', '1', '1');
-
 INSERT INTO usuarios (id, login, password, nickname, email)
 VALUES ('1', 'user1', 'userdos', 'userone', 'll@f.com');
 
+INSERT INTO posts (id, titulo, fecha_publicacion, contenido, status, usuario_id, categoria_id)
+VALUES ('1', 'Mi primer post', '2021-03-04', 'hola amiguitos', 'activo', '1', '1');
+
+
 ejemplo de consulta sencilla:
 
-    SELECT * FROM posts WHERE fecha_publicacion < '2023'
-
-    SELECT * FROM posts WHERE fecha_publicacion < '2022'
+    SELECT * FROM posts WHERE fecha_publicacion < '2023-01-01';
 
 ***Clase 29 SELECT***
 
@@ -1177,17 +1174,68 @@ Existe una función de SELECT para poder contar la cantidad de registros.
 Esa información (un número) será el resultado del query:
     SELECT COUNT(*) FROM posts;
 
-ejemplos de consultas de la clase
+- ejemplos de consultas de la clase
 
     - select count(*) from posts;
     - select count(*) from categorias;
     - select titulo, status from posts;
+- Ejemplos de consultas con alias
+
+SELECT contenido AS content, status AS estado, fecha_publicacion AS fecha FROM posts;
 
 ***Clase 30 FROM***
 
+FROM indica de dónde se deben traer los datos y puede ayudar a hacer sentencias y filtros complejos cuando se quieren unir tablas. 
+La sentencia compañera que nos ayuda con este proceso es JOIN.
 
+Los diagramas de Venn son círculos que se tocan en algún punto para ver dónde está la intersección de conjuntos. 
+Ayudan mucho para poder formular la sentencia JOIN de la manera adecuada dependiendo del query que se quiere hacer.
+
+- Tipos de Join, ejemplos con tabla a y b
+    Left Join: Va traer los datos de la tabla A estén o no estén en la tabla B
+    Right join: Va traer los datos de la tabla B estén o no estén en la tabla A
+    INNER JOIN: Hace referencia a la intersección de dos conjuntos de datos, es decir sirve para traer los datos que están 
+        tanto en A como en B
+    OUTER JOIN
+    UNIÓN: Lo que hace es traer todo 
+    Diferencia simétrica: Va traer los datos que no tienen relación
 
 ***Clase 31 Utilizando la sentencia FROM***
+
+Podemos unir tantas tablas como queramos 
+
+En esta consulta le estamos diciendo lo siguiente:
+    LEFT JOIN:
+        - Seleccione todo de la tabla usuarios y unela con la tabla posts através de su llave primaria que es usuario.id que sea igual en la tabla posts con su usuario_id
+        SELECT * FROM usuarios LEFT JOIN posts ON usuarios.id = posts.usuario_id;
+
+        - Seleccione todo de la tabla usuarios y unela con la tabla posts através de su llave primaria que es usuario.id que sea igual en la tabla posts con su usuario_id
+            donde los posts que tengan el usuario_id sea null o en el valor null
+        SELECT * FROM usuarios LEFT JOIN posts ON usuarios.id = posts.usuario_id where posts.usuario_id IS NULL;
+
+    RIGHT JOIN:
+        - En esta consulta le estamos diciendo que nos traiga los posts sin importar si tiene o no asociado un usuario 
+        SELECT * FROM usuarios LEFT JOIN posts ON usuarios.id = posts.usuario_id;
+        - En esta consulta le estamos diciendo que nos traiga los posts que si tienen asociado un usuario 
+        SELECT * FROM usuarios LEFT JOIN posts ON usuarios.id = posts.usuario_id where posts.usuario_id IS NULL;
+
+    INNER JOIN: Es conocidad como la intersección de datos y nos trae los datos correspondientes y es de las consultas más usadas, 
+        tráeme internamente solo lo que está ligado, es decir, los que tengan dependencia de ambos lados
+        como ejemplo vamos a traer o consultar los usuarios con posts y los posts con usuarios
+        
+        SELECT * FROM usuarios INNER JOIN posts ON usuarios.id = posts.usuario_id;
+    
+    FULL OUTER JOIN: Es para la unión de datos y es un join que tiene algunas bases de datos, en mysql como tal no lo tienen
+
+    UNION:
+        Con esta consulta nos trae todos los datos que tenemos en una tabla
+        Para hacer una unión de datos en mysql lo hacemos con la siguiente sintáxis
+        SELECT * FROM usuarios LEFT JOIN posts ON usuarios.id = posts.usuario_id
+        UNION
+        SELECT * FROM usuarios RIGHT JOIN posts ON usuarios.id = posts.usuario_id;
+    
+    DIFERENCIA SIMÉTRICA:
+        - Lo que existe en A pero no en B y lo que existe en B pero no en A y usamos la siguiene consulta
 
 
 
