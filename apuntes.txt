@@ -1244,6 +1244,51 @@ WHERE es la sentencia que nos ayuda a filtrar tuplas o registros dependiendo de 
 La propiedad LIKE nos ayuda a traer registros de los cuales conocemos sólo una parte de la información.
 La propiedad BETWEEN nos sirve para arrojar registros que estén en el medio de dos. Por ejemplo los registros con id entre 20 y 30.
 
+    SELECT * FROM posts WHERE id > 3;
+    SELECT * FROM posts WHERE id < 3;
+
+Por eso es importante definir los datos numéricos como numéricos y no como cadena
+
+Otra consulta con where
+    Con el operador igual(=)
+        - SELECT * FROM posts WHERE status = 'activo'
+    Con el operador diferente(!=)
+        - SELECT * FROM posts WHERE status != 'activo'
+    Con LIKE y %%
+        Cuando le colocamos esto lo que nos arroja es una busqueda o dato que tenga la palabra que está dentro de los porcentajes, ejemplo:
+        SELECT * FROM posts WHERE titulo LIKE '%hola%'
+
+    SELECT * FROM posts WHERE id < 2;
+    SELECT * FROM posts WHERE id <= 2;
+    SELECT * FROM posts WHERE id > 2;
+    SELECT * FROM posts WHERE id >= 2;
+
+    SELECT * FROM posts WHERE id != 2;
+
+    - Con esta consulta lo que me trae es los datos que en su texto o cadena traiga dicha palabra, en este caso 'messi'
+        SELECT * FROM posts WHERE titulo LIKE '%messi%';
+        - Otros ejemplos
+            SELECT * FROM posts WHERE contenido LIKE '%Primer%';
+            SELECT * FROM posts WHERE contenido LIKE '%primer%';
+    - Con esta consulta lo que me trae es los datos que al principio de su texto o cadena traiga dicha palabra, en este caso 'messi'
+        SELECT * FROM posts WHERE titulo LIKE 'messi%';
+    - Con esta consulta lo que me trae es los datos que al final de su texto o cadena traiga dicha palabra, en este caso 'messi'
+        SELECT * FROM posts WHERE titulo LIKE '%messi';
+    - Con esta consulta traemos datos de acuerdo a fechas
+        SELECT * FROM posts WHERE fecha_publicacion <'2022-09-09';
+        SELECT * FROM posts WHERE fecha_publicacion >'2022-09-09';
+    - Con BETWEEN
+        SELECT * FROM posts WHERE fecha_publicacion BETWEEN '2022-09-09' AND '2024-09-09';
+    Con AND
+        SELECT * FROM posts WHERE fecha_publicacion >'2022-09-09' AND '2024-09-09';
+        SELECT * FROM categorias WHERE id BETWEEN '1' AND '4';
+        SELECT * FROM categorias WHERE id BETWEEN 1 AND 4;
+
+        SELECT * FROM posts WHERE YEAR(fecha_publicacion) BETWEEN '2021' AND '2024';
+        SELECT * FROM posts WHERE MONTH(fecha_publicacion) >= 07;
+        SELECT * FROM posts WHERE MONTH(fecha_publicacion) = 07;
+
+
 ***Clase 33 Utilizando la sentencia WHERE nulo y no nulo***
 
 
