@@ -1237,11 +1237,12 @@ En esta consulta le estamos diciendo lo siguiente:
     DIFERENCIA SIMÉTRICA:
         - Lo que existe en A pero no en B y lo que existe en B pero no en A y usamos la siguiene consulta
 
-
-
 ***Clase 32 WHERE***
 
+WHERE es la sentencia que nos ayuda a filtrar tuplas o registros dependiendo de las características que elegimos.
 
+La propiedad LIKE nos ayuda a traer registros de los cuales conocemos sólo una parte de la información.
+La propiedad BETWEEN nos sirve para arrojar registros que estén en el medio de dos. Por ejemplo los registros con id entre 20 y 30.
 
 ***Clase 33 Utilizando la sentencia WHERE nulo y no nulo***
 
