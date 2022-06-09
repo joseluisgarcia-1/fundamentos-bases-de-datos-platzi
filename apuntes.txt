@@ -1291,7 +1291,28 @@ Otra consulta con where
 
 ***Clase 33 Utilizando la sentencia WHERE nulo y no nulo***
 
+El valor nulo en una tabla generalmente es su valor por defecto cuando nadie le asignó algo diferente. 
+La sintaxis para hacer búsquedas de datos nulos es IS NULL. 
+La sintaxis para buscar datos que no son nulos es IS NOT NULL
 
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL;
+    SELECT * FROM posts WHERE usuario_id IS NULL;
+
+    Agregando AND a la consulta is null o is not null
+
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'inactivo'
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'inactivo' AND id < 3;
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'activo';
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'inactivo' AND categoria_id < 3;
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'activo' AND categoria_id > 2 AND YEAR(fecha_publicacion)<'2019';
+    SELECT * FROM posts WHERE usuario_id IS NOT NULL and status = 'inactivo' AND categoria_id > 2 AND YEAR(fecha_publicacion)>'2019';
+
+
+Para los que necesiten generar datos ficticios en sus tablas
+
+https://www.generatedata.com/
+
+Generalmente a este tipo de datos se les conoce como “dummy data”
 
 ***Clase 34 GROUP BY***
 
