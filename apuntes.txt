@@ -1316,7 +1316,47 @@ Generalmente a este tipo de datos se les conoce como “dummy data”
 
 ***Clase 34 GROUP BY***
 
+GROUP BY tiene que ver con agrupación. Indica a la base de datos qué criterios debe tener en cuenta para agrupar.
 
+
+Cuando se está agrupando se le pueden pasar varios criterios de agrupación, por ejemplo:
+
+    GROUP BY status, post_month;
+
+    Ejemplo de consulta:
+    En esta consulta le decimos:
+        seleccione la tabla status cuente(COUNT(*)) los registros de ese grupo le damos el nombre post_quantity y los traemos de la tabla posts
+        y quiero agrupar los posts con GROUP BY a través del campo status   
+        
+        SELECT status,COUNT(*) post_quantity FROM posts GROUP BY status;
+
+    En esta consulta le decimos:
+        seleccione el año de la publicación y a esa tabla coloquele como nombre post_year cuente esos datos y a esa tabla que trae
+        la cuenta nombrela como post_quantity, eso tomelo de la tabla posts y agrupelo por año(post_year)
+        
+        Para resumir, esta consulta nos va traer los posts que se hicieron en cada año
+
+        SELECT YEAR(fecha_publicacion) AS post_year, COUNT(*) AS post_quantity
+        FROM posts
+        GROUP BY post_year;        
+
+        esta consulta nos va traer los posts que se hicieron en cada mes y nos trae el nombre del mes
+
+        SELECT MONTHNAME(fecha_publicacion) AS post_month, COUNT(*) AS post_quantity
+        FROM posts
+        GROUP BY post_month;
+
+        esta consulta nos va traer los posts que se hicieron en cada mes y nos trae el número del mes
+
+        SELECT MONTH(fecha_publicacion) AS post_month, COUNT(*) AS post_quantity
+        FROM posts
+        GROUP BY post_month;
+
+        esta consulta nos va traer los posts que se hicieron en cada mes, nos trae el nombre del mes y además el estado de cada posts
+
+        SELECT status, MONTHNAME(fecha_publicacion) AS post_month, COUNT(*) AS post_quantity
+        FROM posts
+        GROUP BY status, post_month;
 
 ***Clase 35 ORDER BY y HAVING***
 
