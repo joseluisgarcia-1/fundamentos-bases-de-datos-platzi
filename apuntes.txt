@@ -1360,7 +1360,41 @@ Cuando se está agrupando se le pueden pasar varios criterios de agrupación, po
 
 ***Clase 35 ORDER BY y HAVING***
 
+La sentencia ORDER BY tiene que ver con el ordenamiento de los datos dependiendo de los criterios que quieras usar.
 
+- ASC sirve para ordenar de forma ascendente.
+- DESC sirve para ordenar de forma descendente.
+- LIMIT se usa para limitar la cantidad de resultados que arroja el query.
+- HAVING tiene una similitud muy grande con WHERE, sin embargo el uso de ellos depende del orden. Cuando se quiere seleccionar tuplas agrupadas únicamente se puede hacer con HAVING.
+
+Ejemplos de consultas:
+    - ASC Y DESC
+    Ordenando datos en orden ascendente y descendente:
+        SELECT * FROM posts ORDER BY fecha_publicacion ASC;
+        SELECT * FROM posts ORDER BY fecha_publicacion DESC;    
+        SELECT * FROM posts ORDER BY contenido ASC;
+        SELECT * FROM posts ORDER BY contenido DESC;
+        SELECT * FROM posts ORDER BY categoria_id ASC;
+        SELECT * FROM posts ORDER BY categoria_id DESC;
+    
+    - LIMIT
+    Para estas consultas también tenemos el limit que si por ejemplo tengo muchos datos en la base de datos lo que hago es colocar el limit para decirle que 
+    me traiga información justo hasta el número que le ponga como límite, ejemplo:
+
+        SELECT * FROM posts ORDER BY categoria_id ASC LIMIT 3;
+
+    - HAVING
+        Es parecida a la sentencia WHERE, pero HAVING nos ayuda una vez que ya agrupamos y creamos campos dinámicos que nos cuentan y nos suman valores
+        WHERE nos ayuda a seleccionar los row pero los selecciona antes de hacer una agrupación
+        ejemplo de una consulta:
+            SELECT MONTHNAME(fecha_publicacion) AS post_month, status, COUNT(*) AS post_quantity
+            FROM posts
+            GROUP BY status, post_month
+            HAVING post_quantity > 1
+            ORDER BY post_month;
+        
+        Tener en cuenta que el HAVING se lo coloca usualmente, luego del GROUP BY
+        
 
 ***Clase 36 El interminable agujero de conejo (Nested queries)***
 
