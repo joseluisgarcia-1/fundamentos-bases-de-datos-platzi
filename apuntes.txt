@@ -1457,7 +1457,49 @@ También se pueden hacer NESTED QUERIES (Consultas o Queries Anidados), esto sig
 
 ***Clase 38 Preguntándole a la base de datos***
 
+GROUP_CONCAT toma el resultado del query y lo pone como campo separado por comas.
 
+SELECT posts.titulo, COUNT(*)num_etiquetas
+FROM posts
+	INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.posts_id
+    INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiquetas_id
+GROUP BY posts.id
+ORDER BY num_etiquetas DESC;
+
+
+primer inner join:
+    posts_etiquetas tabla transitiva que ayuda a unir información ON que nos indica qué campo de cada lado los une y le decimos que es posts.id que viene
+    siendo el id del posts, = en el lado de la otra tabla el campo que los une es el posts_etiquetas.posts_id es decir el campo posts_id de la tabla posts_etiquetas
+segundo inner join:
+    de la tabla etiquetas ON donde el campo id de la tabla etiquetas con respecto a el campo etiquetas_id de la tabla posts_etiquetas
+Con eso tenemos la unión entre las 3 tablas: posts, posts_etiquetas y etiquetas, eso lo agrupamos por el id de los posts
+y lo ordenamos de manera descendente en la tabla que le dimos como nombre num_etiquetas
+
+SELECT posts.titulo, GROUP_CONCAT(nombre_etiquetas)
+FROM posts
+	INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.posts_id
+    INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiquetas_id
+GROUP BY posts.id;
+
+Con esta consulta obtenemos cada posts con sus etiquetas asociadas y las trae separadas por comas
+
+para este ejercicio lo hice así:
+
+INSERT INTO etiquetas (id, nombre_etiquetas)
+VALUES ('1', 'first');
+INSERT INTO etiquetas (id, nombre_etiquetas)
+VALUES ('3', 'three');
+
+INSERT INTO posts_etiquetas (id, posts_id, etiquetas_id)
+VALUES ('4', '4','2');
+
+es decir, primero agregué las etiquetas y las asocié a la tabla posts_etiquetas
+
+Ahora vamos a hacer la consulta de un etiqueta que tengamos en la base de datos que no esté asociada con ningún posts
+
+SELECT * FROM etiquetas 
+LEFT JOIN posts_etiquetas ON etiquetas.id = posts_etiquetas.etiquetas_id
+WHERE posts_etiquetas.etiquetas_id IS NULL;
 
 ***Clase 39 Consultando PlatziBlog***
 
