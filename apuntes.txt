@@ -1503,6 +1503,37 @@ WHERE posts_etiquetas.etiquetas_id IS NULL;
 
 ***Clase 39 Consultando PlatziBlog***
 
+Ejemplos de consultas:
+    - Vamos a traer las categorias de los posts pero las vamos a ordenar por las que tienen más posts
+    SELECT c.nombre_categorias, COUNT(*) AS cant_posts 
+    FROM categorias AS c
+    INNER JOIN posts AS p ON c.id = p.categoria_id
+    GROUP BY c.id
+    ORDER BY cant_posts DESC
+    LIMIT 2;
+    
+    - Vamos a consultar qué usuario ha estado creando más posts
+        SELECT u.nickname, COUNT(*) AS cant_posts
+        FROM usuarios AS u
+	    INNER JOIN posts AS p ON u.id = p.usuario_id
+        GROUP BY u.id
+        ORDER BY cant_posts DESC;
+    
+    - Vamos a consultar el número de posts que está escribiendo el autor y en qué categoria está escribiendo
+
+        SELECT u.nickname, COUNT(*) AS cant_posts, GROUP_CONCAT(nombre_categorias)
+        FROM usuarios AS u
+        INNER JOIN posts AS p ON u.id = p.usuario_id
+        INNER JOIN categorias AS c ON c.id = p.categoria_id
+        GROUP BY u.id
+        ORDER BY cant_posts DESC;
+
+
+Puedes usar una abreviación para evitar escribir lo mismo cada vez.
+Ejemplo:
+
+FROM categorias AS c
+
 
 
 Introducción a la bases de datos NO relacionales
