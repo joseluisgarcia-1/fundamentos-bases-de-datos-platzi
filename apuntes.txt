@@ -1589,7 +1589,13 @@ Optimizadas para búsqueda:
 
 ***Clase 41 Servicios administrados y jerarquía de datos***
 
+Firebase es un servicio de Google donde puedes tercerizar muchos elementos en la nube.
+Jerarquía de datos:
 
+    - Base de datos: En este ejemplo, podemos decir que es la que guarda el estado completo de una app
+    - Colección: Es algo parecido a las tablas en las bases de datos relacionales qué son objetos que agrupan la información
+        antes agrupaban tuplas, ahora agrupaban documentos
+    - Documento: Generalmente es la información que se quiere guardar, se guarda en un formato parecido al json
 
 Manejo de modelos de datos en bases de datos no relacionales
 ***Clase 42 Top level collection con Firebase***
