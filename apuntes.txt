@@ -1528,19 +1528,64 @@ Ejemplos de consultas:
         GROUP BY u.id
         ORDER BY cant_posts DESC;
 
+    - Vamos a consultar un usuario que no haya escrito ningún posts
+
+        SELECT * FROM usuarios AS u
+        LEFT JOIN posts ON u.id = posts.usuario_id
+        WHERE posts.usuario_id IS NULL
 
 Puedes usar una abreviación para evitar escribir lo mismo cada vez.
 Ejemplo:
 
 FROM categorias AS c
 
-
-
 Introducción a la bases de datos NO relacionales
 
 ***Clase 40 ¿Qué son y cuáles son los tipos de bases de datos no relacionales?***
 
+Respecto a las bases de datos no relacionales, no existe un solo tipo aunque se engloben en una sola categoría.
 
+Tipos de bases de datos no relacionales:
+
+Clave - valor: Son ideales para almacenar y extraer datos con una clave única. Manejan los diccionarios de manera excepcional. Ejemplos: DynamoDB, Cassandra.
+Basadas en documentos: Son una implementación de clave valor que varía en la forma semiestructurada en que se trata la información. Ideal para almacenar datos JSON y XML. Ejemplos: MongoDB, Firestore.
+Basadas en grafos: Basadas en teoría de grafos, sirven para entidades que se encuentran interconectadas por múltiples relaciones. Ideales para almacenar relaciones complejas. Ejemplos: neo4j, TITAN.
+En memoria: Pueden ser de estructura variada, pero su ventaja radica en la velocidad, ya que al vivir en memoria la extracción de datos es casi inmediata. Ejemplos: Memcached, Redis.
+ Optimizadas para búsquedas: Pueden ser de diversas estructuras, su ventaja radica en que se pueden hacer queries y búsquedas complejas de manera sencilla. Ejemplos: BigQuery, Elasticsearch.
+
+ BASES DE DATOS NO RELACIONES*
+
+Solo responden diferentes necesidades cada una, ya que con las RDB surgen problemas al ir creciendo
+Clave - valor:
+- Son ideales para almacenar y extraer datos con una clave unica.
+- Manejan diccionarios de manera excepcional
+- Se basan en algoritmos de hash o hashmap
+- EJEMPLOS: DynamoDB (maneja AWS), Cassandra (Los usa FB)
+
+Basadas en documentos:
+- Basadas en objetos de tipo JSON. Ideal para almacenar datos JSON y XML
+- Son las más utilizadas despues de los RDBMS
+- Son una implementación de clave valor que varía en la forma semiestructurada en que se trata la información
+- Guarda la forma actual de una aplicación, no son buenas para hacer consulta complejas.
+- EJEMPLOS: MongoDB, Firestore (servicio en la nube, es un ambiente grafico)
+
+Basadas en grafos:
+- Nodos o entidades que tienen multiples relaciones. Estan relacionadas TODOS CON TODOS
+- Se usan en el mundo de la inteligencia artificial, para formar redes neuronales
+- EJEMPLOS: neo4j, TITAN DB
+
+En memoria:
+- Su mayor ventaja es que son sumamente rapidas
+- La respuesta llega en el minimo de tiempo
+- Su desventaja es que son limitadas y hay que guardar cosas en disco
+- Otra desventaja es que son volatiles (si se reinicia, hay que indexar, volver a traer la información del disco)
+- EJEMPLOS: Memcached, Redis
+
+Optimizadas para búsqueda:
+- Se usa para hacer queries complejos
+- Sirven como grandes repositorios de datos, muchas veces historicos
+- Son utilizadas en Business Inteligent y Machine learning
+- EJEMPLOS: Elasticsearch, BigQuery (la ofrece Google)
 
 ***Clase 41 Servicios administrados y jerarquía de datos***
 
