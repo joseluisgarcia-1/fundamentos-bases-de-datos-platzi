@@ -1438,6 +1438,7 @@ FROM: De dónde voy a tomar los datos
 WHERE: Los filtros de los datos que quieres mostrar
 GROUP BY: Los rubros por los que me interesa agrupar la información
 ORDER BY: El orden en que quiero presentar mi información
+    Para por ejemplo obtener un top de datos podemos usar ORDER BY y LIMIT
 HAVING: Los filtros que quiero que mis datos agrupados tengan
 LIMIT: La cantidad de registros que quiero
 
@@ -1451,7 +1452,7 @@ ORDER BY utiliza los siguientes criterios:
     – ASC. Ordena de forma ascendente.
     – DESC. Ordena de forma descendente
     – LIMIT. Limita la cantidad de resultados para mostrar en el query, Ej: Mostrar los 5 primeros registros.
-'
+
 También se pueden hacer NESTED QUERIES (Consultas o Queries Anidados), esto significa que podemos hacer un query dentro de otro query.
 
 ***Clase 38 Preguntándole a la base de datos***
