@@ -1630,10 +1630,23 @@ Tipos de datos en Firestore:
     - Geopoint: Guarda una localización geográfica (coordenadas latitud-longitud).
 
     - Reference: Permite referencia un documento (relaciona dos documentos, no importa su colección).
+        Por ejemplo:
+            Un tipo de dato reference que nos haga referencia a que usuario creó un posts
 
 ***Clase 44 Colecciones vs subcolecciones***
 
+Tener en cuenta que en firebase si no tenemos una colección creada no podemos obtener una base de datos, entonces valga la aclaración hay que primero
+crear una colección
 
+Tener en cuenta que se pueden agregar nuevas colecciones pero esas ya van dentro del documento no de la colección inicial
+este tipo de colecciones significa que están relacionadas al documento y no a la base de datos principal
+ 
+
+La particularidad de las top level collections es que existen en el primer nivel de manera intrínseca. 
+Las subcolecciones ya no vivirán al inicio de la base de datos.
+
+Si tienes una entidad separada que vas a referenciar desde muchos lugares es recomendado usar 
+un top level collection. Por el otro lado si se necesita hacer algo intrínseco al documento es aconsejable usar subcolecciones.
 
 ***Clase 45 Recreando Platziblog***
 
