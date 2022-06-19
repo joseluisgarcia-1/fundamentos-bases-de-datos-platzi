@@ -1701,11 +1701,19 @@ Bases de datos en la vida real
 
 ***Clase 49 Big Data***
 
+Cumple la necesidad de guardar grandes cantidades de datos, además, en muy poco tiempo(puede ser milesimas de segundos)
+    - Cassandra es uno de los ejemplos del uso de big data, aunque tiene la desventaja como de que las llaves están predefinidas
+    y es arduo hacer ciertos join, entre otras desventajas, pero para el caso de meter y sacar datos de manera rápida es útil
 Big Data es un concepto que nace de la necesidad de manejar grandes cantidades de datos. 
 La tendencia comenzó con compañías como YouTube al tener la necesidad de guardar y consultar mucha información de manera rápida.
 Es un gran movimiento que consiste en el uso de diferentes tipos de bases de datos.
 
 ***Clase 50 Data warehouse***
+
+Se usa para guardar datos, grandes cantidades de datos también tiempos como milisegundos pero que quedan de manera histórica
+- Big table:
+    Es una sola tabla
+De sus funcionalidades es guardar datos de manera eterna prácticamente y grandes cantidades
 
 Data Warehouse trata de guardar cantidades masivas de datos para la posteridad. 
 Allí se guarda todo lo que no está viviendo en la aplicación pero es necesario tenerlo.
@@ -1713,23 +1721,57 @@ Debe servir para guardar datos por un largo periodo de tiempo y estos datos se d
 
 ***Clase 51 Data mining***
 
+Se trata de extraer datos, de tratarlos, y de darles un sentido, ordenarlos y sacar algo más organizado
+- Se puede decir que llega al rescate de Data warehouse, es decir, llegar a organizar miles y millones de información desorganizada
+a algo que se pueda darle manejo y con lo cual se puedan presentar informes
 
+El Data Mining se dedica a minar datos, a extraerlos de donde sea que estén (archivos muertos, base de datos actual, etc…) 
+y hacer sentido de ellos para darles un uso.
 
 ***Clase 52 ETL***
 
+Se toman los datos, se los pasa por un proceso de transformación, se le aplican técnicas, donde se puedan sumar, limpiar, varios pasos intermedios
+y al final esos datos se van a cargar en otro lado.
+- Primer caso de uso:
+    justamente el data mining cuando ya se tiene una gran fuente de datos que no tienen orden y se le ha hecho un proceso de limpieza
+    y cargarla en otro lado, quizá en un data warehouse donde pueda estár ordenado y se pueda sacar provecho de estos
+- Segundo caso de uso:
+    Es lo mismo que el primer caso, solo que este se hace en tiempo real, puede ser los datos que tengo vivos en este mismo instante en mi app
+    y hacerles lo mismo, limpiarlos, etc, y cargarla en otro lado, quizá en un data warehouse donde pueda estár ordenado y se pueda sacar provecho de estos
 
+Aunque no hay una tecnología concreta para este tipo de manejo de información, si hay es una idea de como transformar los datos
+
+
+ETL son las siglas de Extract, Transform, Load (extraer, transformar y cargar). 
+Se trata de tomar datos de archivos muertos y convertirlos en algo que sea de utilidad para el negocio.
+También ayuda a tomar los datos vivos de la aplicación, transformarlos y guardarlos en un data warehouse periódicamente.
 
 ***Clase 53 Business intelligence***
 
+Inteligencia para el negocio
 
+Business Intelligence es una parte muy importante de las carreras de datos ya que es el punto final del manejo de estos. 
+Su razón de ser es tener la información lista, clara y que tenga todos los elementos para tomar decisiones en una empresa.
+Es necesario tener una buena sensibilidad por entender el negocio, sus necesidades y la información que puede llevar 
+a tomar decisiones en el momento adecuado al momento de realizar business intelligence.
 
 ***Clase 54 Machine Learning***
 
+En los ejemplos que se han puesto Big Query nos sirve como data warehouse, porque permite ejecutar queries complejos que pueden ayudar inclusco con Business Inteligent
 
+Machine Learning tiene significados que varían. Es una serie de técnicas que involucran la inteligencia artificial y la detección de patrones.
+Machine learning para datos tiene un gran campo de acción y es un paso más allá del business intelligence.
+Nos ayuda a hacer modelos que encuentran patrones fortuitos encontrando correlaciones inesperadas.
+
+Tiene dos casos de uso particulares:
+
+Clasificación
+Predicción
 
 ***Clase 55 Data Science***
 
-
+Data Science es aplicar todas las técnicas de procesamiento de datos. 
+En su manera más pura tiene que ver con gente con un background de estadísticas y ciencias duras.
 
 ***Clase 56 ¿Por qué aprender bases de datos hoy?***
 
